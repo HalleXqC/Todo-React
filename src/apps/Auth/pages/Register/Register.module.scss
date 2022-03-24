@@ -1,0 +1,91 @@
+.root{
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .formTitle{
+    position: relative;
+    color: black;
+    font-size: 32px;
+    font-weight: 600;
+  }
+  .form{
+    position: relative;
+    width: 500px;
+    padding: 24px;
+    -webkit-box-shadow: 0px 0px 11px -1px #bebebe;
+    box-shadow: 0px 0px 11px -1px #bebebe;
+    border-radius: 10px;
+    text-align: center;
+    .formLabel{
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      position: relative; 
+      p{
+        margin: 0;
+        text-align: left;
+        margin: 0 10px 3px 0;
+        width: 30%;
+      }
+      div{
+        width: 100%;
+        .formInput{
+          width: 100%;
+          outline: none;
+          border-radius: 5px;
+          background: none;
+          font-size: 16px;
+          font-family: inherit;
+          margin-bottom: 3px;
+          border: 1px solid rgb(200, 200, 200);
+          padding: 8px 16px ;
+          &:focus{
+              outline: 1pt solid rgb(120, 120, 120);
+          }
+        }
+        .error{
+          position: relative;
+          font-size: 14px;
+          color: crimson;
+          right: 0;
+          bottom: 0;
+        }
+      }
+    }
+    .formSubmit{
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      background: none;
+      font-size: 16px;
+      margin: 0 10px 16px 10px;
+      background-color: #4169e1;
+      color: white;
+      padding: 12px 16px ;
+      cursor: pointer;
+      &:hover{
+          box-shadow: 0px 0px 5px #4169e1;
+      }
+      &:focus{
+          box-shadow: 0px 0px 5px #4169e1;
+      }
+    }
+    .bottomText{
+      p{
+        font-size: 14px;
+        margin: 0;
+        .link{
+          text-decoration: inherit;
+          color: #4169e1;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
