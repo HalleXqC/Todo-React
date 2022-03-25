@@ -20,7 +20,9 @@ export const Login = () => {
     signIn(data)
     .then(res => res.json())
     .then(r => {
-      r?.auth_token ? localStorage.setItem('userToken', JSON.stringify(r)) : setAuthError('Invalid username or password')
+      r?.auth_token 
+        ? localStorage.setItem('userToken', JSON.stringify(r))
+        : setAuthError('Invalid username or password')
       setLoading(false)
     })
   }, [])
@@ -39,7 +41,11 @@ export const Login = () => {
               { ...register('username', requiredRule)}
             />
             {
-              formState.errors.username && <span className={cls.error}>{formState.errors.username.message}</span>
+              formState.errors.username && (
+                <span className={cls.error}>
+                  {formState.errors.username.message}
+                </span>
+              )
             }
           </div>
         </label>
@@ -54,7 +60,11 @@ export const Login = () => {
               { ...register('password', requiredRule )}
             />
             {
-              formState.errors.password && <span className={cls.error}>{formState.errors.password.message}</span>
+              formState.errors.password && (
+                <span className={cls.error}>
+                  {formState.errors.password.message}
+                </span>
+              )
             }
           </div>
         </label>
@@ -70,7 +80,10 @@ export const Login = () => {
         <span className={cls.bottomText}>
           <p>
             Don't have account yet? &nbsp;
-            <Link to="/auth/register" className={cls.link}>Sign up</Link>
+            <Link 
+              to='/auth/register'
+              className={cls.link}
+            >Sign up</Link>
           </p>
         </span>
       </div>

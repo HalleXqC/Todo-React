@@ -1,7 +1,15 @@
 import React from 'react'
 import cls from './Register.module.scss'
 import { useForm } from 'react-hook-form'
-import { usernameRules, birthdayRules, directionRules, emailRules, groupRules, nameRules, passwordRules } from '../../Tools/forms'
+import {
+  usernameRules,
+  birthdayRules,
+  directionRules,
+  emailRules,
+  groupRules,
+  nameRules,
+  passwordRules,
+} from "../../Tools/forms"
 import { Link } from 'react-router-dom'
 import { calculateAge } from '../../Tools/calculateAge';
 import { signUp } from '../../API/index';
@@ -14,7 +22,10 @@ export const Register = () => {
   } = useForm()
 
   const onSubmit = React.useCallback((data) => {
-    signUp({...data, age: calculateAge(data.birthday)})
+    signUp({
+      ...data,
+      age: calculateAge(data.birthday)
+    })
     .then(res => res.json())
     .then(r => {
       console.log(r)
@@ -35,7 +46,11 @@ export const Register = () => {
               { ...register('email', emailRules) }
             />
             {
-              formState.errors.email && <span className={cls.error}>{formState.errors.email.message}</span>
+              formState.errors.email && (
+                <span className={cls.error}>
+                  {formState.errors.email.message}
+                </span>
+              )
             }
           </div>
         </label>
@@ -49,7 +64,11 @@ export const Register = () => {
               { ...register('password', passwordRules) }
             />
             {
-              formState.errors.password && <span className={cls.error}>{formState.errors.password.message}</span>
+              formState.errors.password && (
+                <span className={cls.error}>
+                  {formState.errors.password.message}
+                </span>
+              )
             }
           </div>
         </label>
@@ -63,7 +82,11 @@ export const Register = () => {
               { ...register('firstName', nameRules)}
             />
             {
-              formState.errors.firstName && <span className={cls.error}>{formState.errors.firstName.message}</span>
+              formState.errors.firstName && (
+                <span className={cls.error}>
+                  {formState.errors.firstName.message}
+                </span>
+              )
             }
           </div>
         </label>
@@ -77,7 +100,11 @@ export const Register = () => {
               { ...register('lastName', nameRules)}
             />
             {
-              formState.errors.lastName && <span className={cls.error}>{formState.errors.lastName.message}</span>
+              formState.errors.lastName && (
+                <span className={cls.error}>
+                  {formState.errors.lastName.message}
+                </span>
+              )
             }
           </div>
         </label>
@@ -91,7 +118,11 @@ export const Register = () => {
               { ...register('username', usernameRules)}
             />
             {
-              formState.errors.username && <span className={cls.error}>{formState.errors.username.message}</span>
+              formState.errors.username && (
+                <span className={cls.error}>
+                  {formState.errors.username.message}
+                </span>
+              )
             }
           </div>
         </label>
@@ -105,20 +136,31 @@ export const Register = () => {
               { ...register('group', groupRules)}
             />
             {
-              formState.errors.group && <span className={cls.error}>{formState.errors.group.message}</span>
+              formState.errors.group && (
+                <span className={cls.error}>
+                  {formState.errors.group.message}
+                </span>
+              )
             }
           </div>
         </label>
         <label className={cls.formLabel}>
           <p>Direction:</p>
           <div>
-            <select {...register('direction', directionRules)} className={cls.formInput} >
+            <select 
+              {...register('direction', directionRules)} 
+              className={cls.formInput} 
+            >
               <option value="F">Frontend</option>
               <option value="B">Backend</option>
               <option value="A">Android</option>
             </select>
             {
-              formState.errors.direction && <span className={cls.error}>{formState.errors.direction.message}</span>
+              formState.errors.direction && (
+                <span className={cls.error}>
+                  {formState.errors.direction.message}
+                </span>
+              )
             }
           </div>
         </label>
@@ -131,7 +173,11 @@ export const Register = () => {
               { ...register('birthday', birthdayRules)}
             />
             {
-              formState.errors.birthday && <span className={cls.error}>{formState.errors.birthday.message}</span>
+              formState.errors.birthday && (
+                <span className={cls.error}>
+                  {formState.errors.birthday.message}
+                </span>
+              )
             }
           </div>
         </label>
@@ -145,7 +191,10 @@ export const Register = () => {
         <span className={cls.bottomText}>
           <p>
             Already have account? &nbsp;
-            <Link to="/auth/login" className={cls.link}>Sign in</Link>
+            <Link 
+              to="/auth/login" 
+              className={cls.link}
+            >Sign in</Link>
           </p>
         </span>
       </div>
