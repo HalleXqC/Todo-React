@@ -1,9 +1,9 @@
-import { API } from "./api"
+import axios from '../../../configs'
 
 export const signUp = data => {
-  return API.post('auth/users/', JSON.stringify(data))
+  return axios.post('/auth/users/', data)
 }
 
 export const signIn = data => {
-  return API.post('auth/token/login/', JSON.stringify(data))
+  return axios.post('/auth/token/login/', data)
 }

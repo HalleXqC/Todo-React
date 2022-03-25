@@ -123,7 +123,14 @@ export const Register = () => {
               type="text"
               placeholder="example123"
               className={cls.formInput}
-              { ...register('username', usernameRules)}
+              { ...register('username', {
+                validate: value => {
+                  if (value.length < 10) {
+                    return 'Ne Менее 10 символов'
+                  }
+                  return false
+                }
+              })}
             />
             {
               formState.errors.username ? (

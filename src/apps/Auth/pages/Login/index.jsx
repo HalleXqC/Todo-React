@@ -1,31 +1,29 @@
-import React, { useState } from 'react'
+import React from 'react'
 import cls from './Login.module.scss'
 import { useForm } from 'react-hook-form'
 import { requiredRule } from '../../Tools/forms'
 import { Link } from 'react-router-dom'
-import { signIn } from '../../API'
+import { useLogin } from '../../Hooks/useLogin';
 
 export const Login = () => {
   const {
     register,
     handleSubmit,
     formState,
+    reset,
   } = useForm()
 
-  const [authError, setAuthError] = useState('')
-  const [loading, setLoading] = useState(false)
+  const { actions, loaded } = useLogin()
 
   const onSubmit = React.useCallback((data) => {
-    setLoading(true)
-    signIn(data)
-    .then(res => res.json())
-    .then(r => {
-      r?.auth_token 
-        ? localStorage.setItem('userToken', JSON.stringify(r))
-        : setAuthError('Invalid username or password')
-      setLoading(false)
+    actions.post(data)
+    reset({
+      username: '',
+      password: '',
     })
   }, [])
+
+  console.log(formState.isDirty)
 
   return (
     <div className={cls.root}>
@@ -68,11 +66,13 @@ export const Login = () => {
             }
           </div>
         </label>
-        <p className={cls.error}>{authError && authError}</p>
+
+        {/* <p className={cls.error}>{authError && authError}</p> */}
+
         <button 
           onClick={handleSubmit(onSubmit)}
           className={cls.formSubmit}
-          disabled={loading}
+          disabled={!formState.isDirty || loaded}
         >
           Submit
         </button>
@@ -81,7 +81,7 @@ export const Login = () => {
           <p>
             Don't have account yet? &nbsp;
             <Link 
-              to='/auth/register'
+              to="/auth/register"
               className={cls.link}
             >Sign up</Link>
           </p>
