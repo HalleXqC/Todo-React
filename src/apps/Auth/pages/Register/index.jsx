@@ -13,6 +13,7 @@ import {
 import { Link } from 'react-router-dom'
 import { calculateAge } from '../../Tools/calculateAge';
 import { useRegister } from '../../Hooks/useRegister'
+import { Forms } from '../../../../components/Forms'
 
 export const Register = () => {
   const {
@@ -25,7 +26,6 @@ export const Register = () => {
   const { actions, loaded, regErrors } = useRegister()
 
   const onSubmit = React.useCallback(data => {
-    console.log(data)
     actions.post({...data, age: calculateAge(data.birthday)})
     reset({
       email: '',
@@ -37,7 +37,7 @@ export const Register = () => {
       direction: '1',
       birthday: '',
     })
-  }, [])
+  }, [actions, reset])
 
   return (
     <div className={cls.root}>
@@ -86,43 +86,24 @@ export const Register = () => {
             }
           </div>
         </label>
-        <label className={cls.formLabel}>
-          <p>First name:</p>
-          <div>
-            <input
-              type="text"
-              placeholder="Ivan"
-              className={cls.formInput}
-              { ...register('firstName', nameRules)}
-            />
-            {
-              formState.errors.firstName && (
-                <span className={cls.error}>
-                  {formState.errors.firstName.message}
-                </span>
-              )
-            }
-          </div>
-        </label>
+        <Forms.TextField
+          label="First name"
+          key={'1'}
+          placeholder="Ivan"
+          error={formState.errors?.firstName}
+          className={[cls.formLabel, cls.formInput, cls.error]}
+          { ...register('firstName', nameRules) }
+        />
 
-        <label className={cls.formLabel}>
-          <p>Last name:</p>
-          <div>
-            <input
-              type="text"
-              placeholder="Ivanov"
-              className={cls.formInput}
-              { ...register('lastName', nameRules)}
-            />
-            {
-              formState.errors.lastName && (
-                <span className={cls.error}>
-                  {formState.errors.lastName.message}
-                </span>
-              )
-            }
-          </div>
-        </label>
+        <Forms.TextField
+          label="Last name"
+          key={'2'}
+          placeholder="Ivanov"
+          error={formState.errors?.lastName}
+          className={[cls.formLabel, cls.formInput, cls.error]}
+          { ...register('lastName', nameRules) }
+        />
+
 
         <label className={cls.formLabel}>
           <p>Username:</p>
@@ -131,13 +112,7 @@ export const Register = () => {
               type="text"
               placeholder="example123"
               className={cls.formInput}
-              { ...register('alias', {
-                validate: value => {
-                  if (value.length < 10) {
-                    return 'Не менее 10 символов'
-                  }
-                }
-              })}
+              { ...register('alias', usernameRules)}
             />
             {
               formState.errors.username && (
@@ -156,24 +131,15 @@ export const Register = () => {
           </div>
         </label>
         
-        <label className={cls.formLabel}>
-          <p>Group:</p>
-          <div>
-            <input
-              type="text"
-              placeholder="A-100; F-200"
-              className={cls.formInput}
-              { ...register('group', groupRules)}
-            />
-            {
-              formState.errors.group && (
-                <span className={cls.error}>
-                  {formState.errors.group.message}
-                </span>
-              )
-            }
-          </div>
-        </label>
+        <Forms.TextField
+          label="Group"
+          key={'3'}
+          placeholder="A-100; F-200"
+          error={formState.errors?.group}
+          className={[cls.formLabel, cls.formInput, cls.error]}
+          { ...register('group', groupRules) }
+        />
+
         <label className={cls.formLabel}>
           <p>Direction:</p>
           <div>

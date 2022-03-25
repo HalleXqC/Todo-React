@@ -6,22 +6,29 @@ export const TextField = React.forwardRef(({
   label,
   error,
   disabled,
+  placeholder,
   ...rest
 }, ref) => {
   return (
     <div>
-      {label && <label htmlFor={rest.name}>{label}</label>}
-      <input
-        type={type}
-        className={className}
-        ref={ref}
-        disabled={disabled}
-        {...rest}
-      />
-
-      <div>
-        {error && <span>{error.message}</span>}
-      </div>
+      <label className={className[0]}>
+        <p>{label}:</p>
+        <div>
+          <input
+            type={type}
+            className={className[1]}
+            ref={ref}
+            disabled={disabled}
+            placeholder={placeholder}
+            {...rest}
+          />
+          {error && 
+            <span className={className[2]}>
+              {error.message}
+            </span>
+          }
+        </div>
+      </label>
     </div>
   )
 })

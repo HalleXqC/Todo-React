@@ -11,9 +11,8 @@ export const useRegister = () => {
     signUp(data)
       .then(res => {
         !res.id
-          ? setRegErrors(res)
+          ? setRegErrors(res.toString())
           : alert('Success')
-        console.log(res)
       })
       .catch(err => {
         setRegErrors(err.toString())

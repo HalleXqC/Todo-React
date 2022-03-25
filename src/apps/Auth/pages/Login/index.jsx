@@ -28,30 +28,14 @@ export const Login = () => {
     <div className={cls.root}>
       <h1 className={cls.formTitle}>Sign in</h1>
       <div className={cls.form}>
-        <Forms.TextField 
-          label="Test"
-          name="test"
+        <Forms.TextField
+          label="Email"
           key={'123'}
-          { ...register('test') }
+          placeholder="example@gmail.com"
+          error={formState.errors?.email}
+          className={[cls.formLabel, cls.formInput, cls.error]}
+          { ...register('email', requiredRule) }
         />
-        <label className={cls.formLabel}>
-          <p>Email:</p>
-          <div>
-            <input
-              type="email"
-              placeholder="example@email.com"
-              className={cls.formInput}
-              { ...register('email', requiredRule)}
-            />
-            {
-              formState.errors.username && (
-                <span className={cls.error}>
-                  {formState.errors.username.message}
-                </span>
-              )
-            }
-          </div>
-        </label>
 
         <label className={cls.formLabel}>
           <p>Password:</p>

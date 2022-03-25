@@ -31,9 +31,9 @@ export const nameRules = {
 
 export const usernameRules = {
   required,
-  minLength: {
-    value: 3,
-    message: 'Минимум 3 символа'
+  maxLength: {
+    value: 15,
+    message: 'Не более 15 символов'
   }
 }
 
