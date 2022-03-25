@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import cls from './Register.module.scss'
 import { useForm } from 'react-hook-form'
 import {
@@ -21,6 +21,8 @@ export const Register = () => {
     formState,
   } = useForm()
 
+  const [regErrors, setRegErrors] = useState(null)
+
   const onSubmit = React.useCallback((data) => {
     signUp({
       ...data,
@@ -28,7 +30,9 @@ export const Register = () => {
     })
     .then(res => res.json())
     .then(r => {
-      console.log(r)
+      !r.id
+        ? setRegErrors(r)
+        : alert('Success')
     })
   }, [])
 
@@ -46,11 +50,15 @@ export const Register = () => {
               { ...register('email', emailRules) }
             />
             {
-              formState.errors.email && (
+              formState.errors.email ? (
                 <span className={cls.error}>
                   {formState.errors.email.message}
                 </span>
-              )
+              ) : regErrors?.email ? (
+                <span className={cls.error}>
+                  {regErrors.email.join('')}
+                </span>
+              ) : ''
             }
           </div>
         </label>
@@ -118,11 +126,15 @@ export const Register = () => {
               { ...register('username', usernameRules)}
             />
             {
-              formState.errors.username && (
+              formState.errors.username ? (
                 <span className={cls.error}>
                   {formState.errors.username.message}
                 </span>
-              )
+              ) : regErrors?.username ? (
+                <span className={cls.error}>
+                  {regErrors.username.join('')}
+                </span>
+              ) : ''
             }
           </div>
         </label>

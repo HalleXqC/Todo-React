@@ -53,6 +53,9 @@
           color: crimson;
           right: 0;
           bottom: 0;
+          &::first-letter{
+            text-transform: uppercase;
+          }
         }
       }
     }
