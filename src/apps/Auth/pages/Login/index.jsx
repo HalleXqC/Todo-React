@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { requiredRule } from '../../Tools/forms'
 import { Link } from 'react-router-dom'
 import { useLogin } from '../../Hooks/useLogin';
+import { Forms } from '../../../../components/Forms'
 
 export const Login = () => {
   const {
@@ -13,30 +14,34 @@ export const Login = () => {
     reset,
   } = useForm()
 
-  const { actions, loaded } = useLogin()
+  const { actions, loaded, authError, } = useLogin()
 
   const onSubmit = React.useCallback((data) => {
     actions.post(data)
     reset({
-      username: '',
+      email: '',
       password: '',
     })
-  }, [])
-
-  console.log(formState.isDirty)
+  }, [actions, reset])
 
   return (
     <div className={cls.root}>
       <h1 className={cls.formTitle}>Sign in</h1>
       <div className={cls.form}>
+        <Forms.TextField 
+          label="Test"
+          name="test"
+          key={'123'}
+          { ...register('test') }
+        />
         <label className={cls.formLabel}>
-          <p>Username:</p>
+          <p>Email:</p>
           <div>
             <input
-              type="text"
-              placeholder="example"
+              type="email"
+              placeholder="example@email.com"
               className={cls.formInput}
-              { ...register('username', requiredRule)}
+              { ...register('email', requiredRule)}
             />
             {
               formState.errors.username && (
@@ -67,7 +72,7 @@ export const Login = () => {
           </div>
         </label>
 
-        {/* <p className={cls.error}>{authError && authError}</p> */}
+        <p className={cls.error}>{authError && authError}</p>
 
         <button 
           onClick={handleSubmit(onSubmit)}

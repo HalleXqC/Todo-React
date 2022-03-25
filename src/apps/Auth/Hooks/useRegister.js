@@ -1,21 +1,22 @@
-import React from 'react'
-import { signIn } from '../API'
+import React from "react";
+import { signUp } from "../API";
 
-export const useLogin = () => {
+export const useRegister = () => {
   const [loaded, setLoaded] = React.useState(false)
-  const [authError, setAuthError] = React.useState(null)
+  const [regErrors, setRegErrors] = React.useState(null)
 
   const post = React.useCallback((data) => {
     setLoaded(true)
 
-    signIn(data)
+    signUp(data)
       .then(res => {
-        !res.auth_token
-          ? setAuthError('Неправильный логин или пароль!')
+        !res.id
+          ? setRegErrors(res)
           : alert('Success')
+        console.log(res)
       })
       .catch(err => {
-        setAuthError(err.toString())
+        setRegErrors(err.toString())
       })
       .finally(() => {
         setLoaded(false)
@@ -23,7 +24,7 @@ export const useLogin = () => {
   }, [])
 
   return {
-    authError,
+    regErrors,
     loaded,
     actions: {
       post,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import cls from './Register.module.scss'
 import { useForm } from 'react-hook-form'
 import {
@@ -12,34 +12,37 @@ import {
 } from "../../Tools/forms"
 import { Link } from 'react-router-dom'
 import { calculateAge } from '../../Tools/calculateAge';
-import { signUp } from '../../API/index';
+import { useRegister } from '../../Hooks/useRegister'
 
 export const Register = () => {
   const {
     register,
     handleSubmit,
     formState,
+    reset,
   } = useForm()
+  
+  const { actions, loaded, regErrors } = useRegister()
 
-  const [regErrors, setRegErrors] = useState(null)
-
-  const onSubmit = React.useCallback((data) => {
-    signUp({
-      ...data,
-      age: calculateAge(data.birthday)
-    })
-    .then(res => res.json())
-    .then(r => {
-      !r.id
-        ? setRegErrors(r)
-        : alert('Success')
+  const onSubmit = React.useCallback(data => {
+    console.log(data)
+    actions.post({...data, age: calculateAge(data.birthday)})
+    reset({
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      alias: '',
+      group: '',
+      direction: '1',
+      birthday: '',
     })
   }, [])
 
   return (
     <div className={cls.root}>
       <h1 className={cls.formTitle}>Sign up</h1>
-      <div className={cls.form}>
+      <form onSubmit={handleSubmit(onSubmit)} className={cls.form}>
         <label className={cls.formLabel}>
           <p>Email:</p>
           <div>
@@ -50,15 +53,18 @@ export const Register = () => {
               { ...register('email', emailRules) }
             />
             {
-              formState.errors.email ? (
+              formState.errors.email && (
                 <span className={cls.error}>
                   {formState.errors.email.message}
                 </span>
-              ) : regErrors?.email ? (
+              )
+            }
+            {
+              regErrors?.email && (
                 <span className={cls.error}>
                   {regErrors.email.join('')}
                 </span>
-              ) : ''
+              )
             }
           </div>
         </label>
@@ -98,6 +104,7 @@ export const Register = () => {
             }
           </div>
         </label>
+
         <label className={cls.formLabel}>
           <p>Last name:</p>
           <div>
@@ -116,6 +123,7 @@ export const Register = () => {
             }
           </div>
         </label>
+
         <label className={cls.formLabel}>
           <p>Username:</p>
           <div>
@@ -123,28 +131,31 @@ export const Register = () => {
               type="text"
               placeholder="example123"
               className={cls.formInput}
-              { ...register('username', {
+              { ...register('alias', {
                 validate: value => {
                   if (value.length < 10) {
-                    return 'Ne Менее 10 символов'
+                    return 'Не менее 10 символов'
                   }
-                  return false
                 }
               })}
             />
             {
-              formState.errors.username ? (
+              formState.errors.username && (
                 <span className={cls.error}>
                   {formState.errors.username.message}
                 </span>
-              ) : regErrors?.username ? (
+              )
+            }
+            {
+              regErrors?.username && (
                 <span className={cls.error}>
                   {regErrors.username.join('')}
                 </span>
-              ) : ''
+              )
             }
           </div>
         </label>
+        
         <label className={cls.formLabel}>
           <p>Group:</p>
           <div>
@@ -170,9 +181,9 @@ export const Register = () => {
               {...register('direction', directionRules)} 
               className={cls.formInput} 
             >
-              <option value="F">Frontend</option>
-              <option value="B">Backend</option>
-              <option value="A">Android</option>
+              <option value="1">Android</option>
+              <option value="2">Backend</option>
+              <option value="3">Frontend</option>
             </select>
             {
               formState.errors.direction && (
@@ -200,9 +211,10 @@ export const Register = () => {
             }
           </div>
         </label>
-        <button 
-          onClick={handleSubmit(onSubmit)}
+        <button
+          type="submit"
           className={cls.formSubmit}
+          disabled={loaded}
         >
           Submit
         </button>
@@ -216,7 +228,7 @@ export const Register = () => {
             >Sign in</Link>
           </p>
         </span>
-      </div>
+      </form>
     </div>
   )
 }
