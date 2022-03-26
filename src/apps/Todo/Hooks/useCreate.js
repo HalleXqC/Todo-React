@@ -3,13 +3,14 @@ import { createTodo } from '../API'
 
 export const useCreate = () => {
   const [loaded, setLoaded] = React.useState(false)
+  const token = localStorage.getItem('userToken')
 
   const post = React.useCallback((data) => {
     setLoaded(true)
 
-    createTodo(data)
+    createTodo(data, token)
       .then(res => {
-        alert(res)
+        console.log(res)
       })
       .finally(() => {
         setLoaded(false)

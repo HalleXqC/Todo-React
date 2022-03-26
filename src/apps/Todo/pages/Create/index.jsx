@@ -17,13 +17,11 @@ export const Create = () => {
   const { actions, loaded } = useCreate()
 
   const onSubmit = React.useCallback(data => {
-    console.log(data)
-
-    // actions.post(data)
-    // reset({
-    //   title: '',
-    //   password: '',
-    // })
+    actions.post(data)
+    reset({
+      title: '',
+      text: '',
+    })
   })
 
   return (

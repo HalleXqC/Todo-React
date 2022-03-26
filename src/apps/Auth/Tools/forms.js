@@ -1,5 +1,10 @@
 const required = 'Обязательное поле'
 
+const regex = {
+  withoutSpaces: /^\S*$/,
+  onlyLatin: /^[a-zA-Z]+$/,
+}
+
 export const requiredRule = {
   required,
 }
@@ -10,6 +15,10 @@ export const passwordRules = {
     value: 8,
     message: 'Минимум 8 символов',
   },
+  pattern: {
+    value: /^\S*$/,
+    message: 'Пароль не может содержать пробелы'
+  }
 }
 
 
@@ -30,7 +39,11 @@ export const usernameRules = {
   maxLength: {
     value: 15,
     message: 'Не более 15 символов'
-  }
+  },
+  pattern: {
+    value: /^[A-Za-z]+$/,
+    message: 'Только латинские буквы без пробелов'
+  },
 }
 
 export const groupRules = {

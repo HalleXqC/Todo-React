@@ -1,7 +1,7 @@
 import instance from '../../../configs'
 
 export const signUp = data => {
-  return instance.post('/auth/users/', data)
+  return instance.post('/users/register/', data)
 }
 
 export const signIn = data => {

@@ -10,12 +10,10 @@ export const useRegister = () => {
 
     signUp(data)
       .then(res => {
-        !res.id
-          ? setRegErrors(res.toString())
-          : alert('Success')
+        res.status === 201 && alert('Success')
       })
       .catch(err => {
-        setRegErrors(err.toString())
+        setRegErrors(err.response.data)
       })
       .finally(() => {
         setLoaded(false)

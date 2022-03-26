@@ -36,6 +36,7 @@ export const Register = () => {
       direction: '1',
       birthday: '',
     })
+
   }, [actions, reset])
 
   return (
@@ -85,7 +86,7 @@ export const Register = () => {
           label="Username"
           key={'5'}
           placeholder="example123"
-          error={formState.errors?.username ? formState.errors.username : regErrors?.alias ? regErrors.alias.toString() : ''}
+          error={formState.errors?.alias ? formState.errors.alias : regErrors?.username ? regErrors.username.toString() : ''}
           className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('alias', usernameRules) }
         />
@@ -115,8 +116,6 @@ export const Register = () => {
           className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('birthday', birthdayRules)}
         />
-
-        <p className={cls.error}>{regErrors && regErrors}</p>
 
         <Forms.SubmitButton
           className={cls.formSubmit}

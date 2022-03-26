@@ -1,11 +1,11 @@
 import React from 'react'
 
-export const SubmitButton = ({loaded = false, className}) => {
+export const SubmitButton = ({disabled, className}) => {
   return (
     <button 
       type="submit"
       className={className}
-      disabled={loaded}
+      disabled={disabled}
     >
       Submit
     </button>

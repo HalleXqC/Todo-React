@@ -10,12 +10,11 @@ export const useLogin = () => {
 
     signIn(data)
       .then(res => {
-        !res.auth_token
-          ? setAuthError('Неправильный логин или пароль!')
-          : alert('Success')
+        res.data.auth_token
+          && localStorage.setItem('userToken', res.data.auth_token)
       })
       .catch(() => {
-        setAuthError('Неправильный логин или пароль')
+        setAuthError('Неправильный email или пароль')
       })
       .finally(() => {
         setLoaded(false)

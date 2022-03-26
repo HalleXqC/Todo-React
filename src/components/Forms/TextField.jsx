@@ -24,7 +24,7 @@ export const TextField = React.forwardRef(({
           />
           {error && 
             <span className={className[2]}>
-              {error.message}
+              {error.message ? error.message : error}
             </span>
           }
         </div>
