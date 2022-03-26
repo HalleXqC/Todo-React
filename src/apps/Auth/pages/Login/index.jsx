@@ -50,23 +50,17 @@ export const Login = () => {
 
         <p className={cls.error}>{authError && authError}</p>
 
-        <button 
-          type="submit"
+        <Forms.SubmitButton 
           className={cls.formSubmit}
           disabled={loaded}
-        >
-          Submit
-        </button>
+        />
 
-        <span className={cls.bottomText}>
-          <p>
-            Don't have account yet? &nbsp;
-            <Link 
-              to="/auth/register"
-              className={cls.link}
-            >Sign up</Link>
-          </p>
-        </span>
+        <Forms.Footer 
+          content={["Don't have account yet?", 'Sign up']}
+          className={[cls.bottomText, cls.link]}
+          to="/auth/register"
+        />
+        
       </form>
     </div>
   )

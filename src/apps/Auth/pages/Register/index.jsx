@@ -43,31 +43,16 @@ export const Register = () => {
     <div className={cls.root}>
       <h1 className={cls.formTitle}>Sign up</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={cls.form}>
-        <label className={cls.formLabel}>
-          <p>Email:</p>
-          <div>
-            <input
-              type="email"
-              placeholder="example@gmail.com"
-              className={cls.formInput}
-              { ...register('email', emailRules) }
-            />
-            {
-              formState.errors.email && (
-                <span className={cls.error}>
-                  {formState.errors.email.message}
-                </span>
-              )
-            }
-            {
-              regErrors?.email && (
-                <span className={cls.error}>
-                  {regErrors.email.join('')}
-                </span>
-              )
-            }
-          </div>
-        </label>
+
+        <Forms.TextField
+          label="Email"
+          type="email"
+          key={'4'}
+          placeholder="example@email.com"
+          error={formState.errors?.email ? formState.errors.email : regErrors?.email ? regErrors.email.toString() : ''}
+          className={[cls.formLabel, cls.formInput, cls.error]}
+          { ...register('email', emailRules) }
+        />
 
         <Forms.Password 
           label="Password"
@@ -95,33 +80,16 @@ export const Register = () => {
           error={formState.errors?.lastName}
           className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('lastName', nameRules) }
-        /> 
+        />
 
-        <label className={cls.formLabel}>
-          <p>Username:</p>
-          <div>
-            <input
-              type="text"
-              placeholder="example123"
-              className={cls.formInput}
-              { ...register('alias', usernameRules)}
-            />
-            {
-              formState.errors.alias && (
-                <span className={cls.error}>
-                  {formState.errors.alias.message}
-                </span>
-              )
-            }
-            {
-              regErrors?.alias && (
-                <span className={cls.error}>
-                  {regErrors.alias.join('')}
-                </span>
-              )
-            }
-          </div>
-        </label>
+        <Forms.TextField
+          label="Username"
+          key={'4'}
+          placeholder="example123"
+          error={formState.errors?.username ? formState.errors.username : regErrors?.alias ? regErrors.alias.toString() : ''}
+          className={[cls.formLabel, cls.formInput, cls.error]}
+          { ...register('username', usernameRules) }
+        />
         
         <Forms.TextField
           label="Group"
@@ -151,23 +119,17 @@ export const Register = () => {
 
         <p className={cls.error}>{regErrors && regErrors}</p>
 
-        <button
-          type="submit"
+        <Forms.SubmitButton
           className={cls.formSubmit}
           disabled={loaded}
-        >
-          Submit
-        </button>
+        />
 
-        <span className={cls.bottomText}>
-          <p>
-            Already have account? &nbsp;
-            <Link 
-              to="/auth/login" 
-              className={cls.link}
-            >Sign in</Link>
-          </p>
-        </span>
+        <Forms.Footer 
+          content={['Already have account?', 'Sign in']}
+          className={[cls.bottomText, cls.link]}
+          to="/auth/login"
+        />
+        
       </form>
     </div>
   )
