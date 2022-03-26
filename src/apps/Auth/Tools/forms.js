@@ -1,7 +1,7 @@
 const required = 'Обязательное поле'
 
 export const requiredRule = {
-  required
+  required,
 }
 
 export const passwordRules = {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const SubmitButton = ({loaded, className}) => {
+export const SubmitButton = ({loaded = false, className}) => {
   return (
     <button 
       type="submit"

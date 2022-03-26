@@ -2,7 +2,6 @@ import React from 'react'
 import cls from './Login.module.scss'
 import { useForm } from 'react-hook-form'
 import { requiredRule } from '../../Tools/forms'
-import { Link } from 'react-router-dom'
 import { useLogin } from '../../Hooks/useLogin';
 import { Forms } from '../../../../components/Forms'
 
@@ -16,7 +15,7 @@ export const Login = () => {
 
   const { actions, loaded, authError, } = useLogin()
 
-  const onSubmit = React.useCallback((data) => {
+  const onSubmit = React.useCallback(data => {
     actions.post(data)
     reset({
       email: '',
