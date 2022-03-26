@@ -27,7 +27,8 @@ export const Login = () => {
   return (
     <div className={cls.root}>
       <h1 className={cls.formTitle}>Sign in</h1>
-      <div className={cls.form}>
+      <form onSubmit={handleSubmit(onSubmit)} className={cls.form}>
+
         <Forms.TextField
           label="Email"
           key={'123'}
@@ -37,31 +38,22 @@ export const Login = () => {
           { ...register('email', requiredRule) }
         />
 
-        <label className={cls.formLabel}>
-          <p>Password:</p>
-          <div>
-            <input
-              type="password"
-              placeholder="123456"
-              className={cls.formInput}
-              { ...register('password', requiredRule )}
-            />
-            {
-              formState.errors.password && (
-                <span className={cls.error}>
-                  {formState.errors.password.message}
-                </span>
-              )
-            }
-          </div>
-        </label>
+        <Forms.Password
+          label="Password"
+          key={'321'}
+          placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+          error={formState.errors?.password}
+          className={[cls.formLabel, cls.formInput, cls.error, cls.formEye]}
+          id={cls.formPassword}
+          { ...register('password', requiredRule) }
+        />
 
         <p className={cls.error}>{authError && authError}</p>
 
         <button 
-          onClick={handleSubmit(onSubmit)}
+          type="submit"
           className={cls.formSubmit}
-          disabled={!formState.isDirty || loaded}
+          disabled={loaded}
         >
           Submit
         </button>
@@ -75,7 +67,7 @@ export const Login = () => {
             >Sign up</Link>
           </p>
         </span>
-      </div>
+      </form>
     </div>
   )
 }

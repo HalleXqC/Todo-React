@@ -68,27 +68,19 @@ export const Register = () => {
             }
           </div>
         </label>
-        <label className={cls.formLabel}>
-          <p>Password:</p>
-          <div>
-            <input
-              type="password"
-              placeholder="123456"
-              className={cls.formInput}
-              { ...register('password', passwordRules) }
-            />
-            {
-              formState.errors.password && (
-                <span className={cls.error}>
-                  {formState.errors.password.message}
-                </span>
-              )
-            }
-          </div>
-        </label>
+        <Forms.Password 
+          label="Password"
+          key={'2'}
+          placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+          error={formState.errors?.password}
+          className={[cls.formLabel, cls.formInput, cls.error, cls.formEye]}
+          id={cls.formPassword}
+          { ...register('password', passwordRules) }
+        />
+
         <Forms.TextField
           label="First name"
-          key={'1'}
+          key={'3'}
           placeholder="Ivan"
           error={formState.errors?.firstName}
           className={[cls.formLabel, cls.formInput, cls.error]}
@@ -97,7 +89,7 @@ export const Register = () => {
 
         <Forms.TextField
           label="Last name"
-          key={'2'}
+          key={'4'}
           placeholder="Ivanov"
           error={formState.errors?.lastName}
           className={[cls.formLabel, cls.formInput, cls.error]}
@@ -133,7 +125,7 @@ export const Register = () => {
         
         <Forms.TextField
           label="Group"
-          key={'3'}
+          key={'6'}
           placeholder="A-100; F-200"
           error={formState.errors?.group}
           className={[cls.formLabel, cls.formInput, cls.error]}
@@ -177,6 +169,9 @@ export const Register = () => {
             }
           </div>
         </label>
+
+        <p className={cls.error}>{regErrors && regErrors}</p>
+
         <button
           type="submit"
           className={cls.formSubmit}

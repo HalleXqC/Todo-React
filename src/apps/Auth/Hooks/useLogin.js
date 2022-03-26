@@ -14,8 +14,8 @@ export const useLogin = () => {
           ? setAuthError('Неправильный логин или пароль!')
           : alert('Success')
       })
-      .catch(err => {
-        setAuthError(err.toString())
+      .catch(() => {
+        setAuthError('Неправильный логин или пароль')
       })
       .finally(() => {
         setLoaded(false)
