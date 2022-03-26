@@ -5,7 +5,7 @@ export const useRegister = () => {
   const [loaded, setLoaded] = React.useState(false)
   const [regErrors, setRegErrors] = React.useState(null)
 
-  const post = React.useCallback((data) => {
+  const post = React.useCallback(data => {
     setLoaded(true)
 
     signUp(data)

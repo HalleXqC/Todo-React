@@ -1,32 +1,25 @@
 import React from 'react'
 
-export const Select = React.forwardRef(({
+export const Date = React.forwardRef(({
+  type = 'date',
   className = '',
   label,
   error,
   disabled,
-  options,
   ...rest
 }, ref) => {
-
   return (
     <div>
       <label className={className[0]}>
         <p>{label}:</p>
         <div>
-          <select
+          <input
+            type={type}
             className={className[1]}
             ref={ref}
             disabled={disabled}
             {...rest}
-          >
-            {options.map((item, i) => (
-              <option value={i + 1 + ''} key={i} >
-                {item}
-              </option>
-            ))}
-          </select>
-
+          />
           {error && 
             <span className={className[2]}>
               {error.message}
