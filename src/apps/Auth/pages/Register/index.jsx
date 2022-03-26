@@ -68,6 +68,7 @@ export const Register = () => {
             }
           </div>
         </label>
+
         <Forms.Password 
           label="Password"
           key={'2'}
@@ -94,8 +95,7 @@ export const Register = () => {
           error={formState.errors?.lastName}
           className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('lastName', nameRules) }
-        />
-
+        /> 
 
         <label className={cls.formLabel}>
           <p>Username:</p>
@@ -107,16 +107,16 @@ export const Register = () => {
               { ...register('alias', usernameRules)}
             />
             {
-              formState.errors.username && (
+              formState.errors.alias && (
                 <span className={cls.error}>
-                  {formState.errors.username.message}
+                  {formState.errors.alias.message}
                 </span>
               )
             }
             {
-              regErrors?.username && (
+              regErrors?.alias && (
                 <span className={cls.error}>
-                  {regErrors.username.join('')}
+                  {regErrors.alias.join('')}
                 </span>
               )
             }
@@ -132,43 +132,22 @@ export const Register = () => {
           { ...register('group', groupRules) }
         />
 
-        <label className={cls.formLabel}>
-          <p>Direction:</p>
-          <div>
-            <select 
-              {...register('direction', directionRules)} 
-              className={cls.formInput} 
-            >
-              <option value="1">Android</option>
-              <option value="2">Backend</option>
-              <option value="3">Frontend</option>
-            </select>
-            {
-              formState.errors.direction && (
-                <span className={cls.error}>
-                  {formState.errors.direction.message}
-                </span>
-              )
-            }
-          </div>
-        </label>
-        <label className={cls.formLabel}>
-          <p>Date of Birth:</p>
-          <div>
-            <input
-              type="date"
-              className={cls.formInput}
-              { ...register('birthday', birthdayRules)}
-            />
-            {
-              formState.errors.birthday && (
-                <span className={cls.error}>
-                  {formState.errors.birthday.message}
-                </span>
-              )
-            }
-          </div>
-        </label>
+        <Forms.Select
+          label="Direction"
+          key={'7'}
+          error={formState.errors?.direction}
+          className={[cls.formLabel, cls.formInput, cls.error]}
+          options={['Android', 'Backend', 'Frontend']}
+          { ...register('direction', directionRules) }
+        />
+
+        <Forms.Date
+          label="Date of Birth"
+          key={'8'}
+          error={formState.errors?.birthday}
+          className={[cls.formLabel, cls.formInput, cls.error]}
+          { ...register('birthday', birthdayRules)}
+        />
 
         <p className={cls.error}>{regErrors && regErrors}</p>
 
