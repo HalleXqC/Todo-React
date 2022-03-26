@@ -10,7 +10,6 @@ import {
   nameRules,
   passwordRules,
 } from "../../Tools/forms"
-import { Link } from 'react-router-dom'
 import { calculateAge } from '../../Tools/calculateAge';
 import { useRegister } from '../../Hooks/useRegister'
 import { Forms } from '../../../../components/Forms'
@@ -47,7 +46,7 @@ export const Register = () => {
         <Forms.TextField
           label="Email"
           type="email"
-          key={'4'}
+          key={'1'}
           placeholder="example@email.com"
           error={formState.errors?.email ? formState.errors.email : regErrors?.email ? regErrors.email.toString() : ''}
           className={[cls.formLabel, cls.formInput, cls.error]}
@@ -84,11 +83,11 @@ export const Register = () => {
 
         <Forms.TextField
           label="Username"
-          key={'4'}
+          key={'5'}
           placeholder="example123"
           error={formState.errors?.username ? formState.errors.username : regErrors?.alias ? regErrors.alias.toString() : ''}
           className={[cls.formLabel, cls.formInput, cls.error]}
-          { ...register('username', usernameRules) }
+          { ...register('alias', usernameRules) }
         />
         
         <Forms.TextField
@@ -129,7 +128,7 @@ export const Register = () => {
           className={[cls.bottomText, cls.link]}
           to="/auth/login"
         />
-        
+
       </form>
     </div>
   )

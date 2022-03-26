@@ -21,7 +21,7 @@ export const Select = React.forwardRef(({
             {...rest}
           >
             {options.map((item, i) => (
-              <option value={i + 1 + ''}>
+              <option value={i + 1 + ''} key={i} >
                 {item}
               </option>
             ))}
