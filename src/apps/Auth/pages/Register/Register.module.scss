@@ -92,19 +92,6 @@
           box-shadow: 0px 0px 5px #4169e1;
       }
     }
-    .bottomText{
-      p{
-        font-size: 14px;
-        margin: 0;
-        .link{
-          text-decoration: inherit;
-          color: #4169e1;
-          &:hover{
-            text-decoration: underline;
-          }
-        }
-      }
-    }
     .error{
       color: crimson;
     }

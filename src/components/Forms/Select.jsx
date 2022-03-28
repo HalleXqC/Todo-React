@@ -5,7 +5,7 @@ export const Select = React.forwardRef(({
   label,
   error,
   disabled,
-  options,
+  children,
   ...rest
 }, ref) => {
 
@@ -20,11 +20,7 @@ export const Select = React.forwardRef(({
             disabled={disabled}
             {...rest}
           >
-            {options.map((item, i) => (
-              <option value={i + 1 + ''} key={i} >
-                {item}
-              </option>
-            ))}
+            {children}
           </select>
 
           {error && 

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { requiredRule } from '../../Tools/forms'
 import { useLogin } from '../../Hooks/useLogin';
 import { Forms } from '../../../../components/Forms'
+import Footer from '../../../../components/Footer';
 
 export const Login = () => {
   const {
@@ -54,9 +55,8 @@ export const Login = () => {
           disabled={loaded}
         />
 
-        <Forms.Footer 
+        <Footer
           content={["Don't have account yet?", 'Sign up']}
-          className={[cls.bottomText, cls.link]}
           to="/auth/register"
         />
         

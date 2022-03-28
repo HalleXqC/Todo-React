@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 import { Login } from '../../apps/Auth/pages'
 
 const PrivateRoutes = () => {
-  const isAuth = true
+  const isAuth = localStorage.getItem('userToken')
 
   return isAuth ? <Outlet /> : <Login />
 }

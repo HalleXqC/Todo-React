@@ -13,6 +13,7 @@ import {
 import { calculateAge } from '../../Tools/calculateAge';
 import { useRegister } from '../../Hooks/useRegister'
 import { Forms } from '../../../../components/Forms'
+import Footer from '../../../../components/Footer';
 
 export const Register = () => {
   const {
@@ -38,6 +39,14 @@ export const Register = () => {
     })
 
   }, [actions, reset])
+
+  const options = ['Android', 'Backend', 'Frontend'].map((item, i) => {
+    return (
+      <option value={i + 1 + ''} key={i} >
+        {item}
+      </option>
+    )
+  })
 
   return (
     <div className={cls.root}>
@@ -105,7 +114,7 @@ export const Register = () => {
           key={'7'}
           error={formState.errors?.direction}
           className={[cls.formLabel, cls.formInput, cls.error]}
-          options={['Android', 'Backend', 'Frontend']}
+          children={options}
           { ...register('direction', directionRules) }
         />
 
@@ -122,9 +131,8 @@ export const Register = () => {
           disabled={loaded}
         />
 
-        <Forms.Footer 
+        <Footer
           content={['Already have account?', 'Sign in']}
-          className={[cls.bottomText, cls.link]}
           to="/auth/login"
         />
 

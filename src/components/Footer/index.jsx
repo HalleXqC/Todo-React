@@ -1,16 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import cls from './Footer.module.scss'
 
-export const Footer = ({content, to, className,}) => {
+const Footer = ({ content, to }) => {
   return (
-    <div className={className[0]}>
+    <div className={cls.bottomText}>
       <p>
         {content[0]} &nbsp;
         <Link 
           to={to}
-          className={className[1]}
+          className={cls.link}
         >{content[1]}</Link>
       </p>
     </div>
   )
 }
+
+export default Footer

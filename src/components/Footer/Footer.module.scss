@@ -1,0 +1,13 @@
+.bottomText{
+  p{
+    font-size: 14px;
+    margin: 0;
+    .link{
+      text-decoration: inherit;
+      color: #4169e1;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+}

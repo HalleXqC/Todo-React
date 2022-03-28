@@ -1,18 +1,21 @@
-import React from "react";
-import { signUp } from "../API";
+import React from "react"
+import { signUp } from "../API"
+import { useNavigate } from 'react-router-dom'
 
 export const useRegister = () => {
   const [loaded, setLoaded] = React.useState(false)
   const [regErrors, setRegErrors] = React.useState(null)
+  const navigate = useNavigate()
 
   const post = React.useCallback(data => {
     setLoaded(true)
 
     signUp(data)
-      .then(res => {
-        res.status === 201 && alert('Success')
+      .then(() => {
+        navigate('/auth/login')
       })
       .catch(err => {
+        console.log(err.response.data)
         setRegErrors(err.response.data)
       })
       .finally(() => {

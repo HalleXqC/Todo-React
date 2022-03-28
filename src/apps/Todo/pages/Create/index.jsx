@@ -3,7 +3,8 @@ import cls from './Create.module.scss'
 import { useForm } from 'react-hook-form'
 import { Forms } from '../../../../components/Forms'
 import { textRules, titleRules, } from '../../Tools/forms'
-import { useCreate } from '../../Hooks/useCreate';
+import { useCreate } from '../../Hooks/useCreate'
+import Footer from '../../../../components/Footer'
 
 export const Create = () => {
 
@@ -11,18 +12,28 @@ export const Create = () => {
     register,
     handleSubmit,
     formState,
+    setValue,
     reset,
+    watch,
   } = useForm()
+
+  const category = watch('category')
 
   const { actions, loaded } = useCreate()
 
   const onSubmit = React.useCallback(data => {
-    actions.post(data)
-    reset({
-      title: '',
-      text: '',
-    })
+    console.log(data)
+    // actions.post(data)
+    // reset({
+    //   title: '',
+    //   text: '',
+    // })
   })
+
+  React.useEffect(() => {
+    setValue('category', '1')
+    register('category')
+  }, [])
 
   return (
     <section className={cls.root}>
@@ -35,6 +46,34 @@ export const Create = () => {
           className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('title', titleRules)}
         />
+
+        <Forms.Select
+          label="Category"
+          className={[cls.formLabel, cls.formInput, cls.error]}
+          onChange={e => {
+            reset({
+              new_category: '',
+            })
+
+            const value = e.currentTarget.value
+            setValue('category', value)
+          }}
+        >
+          <option defaultChecked value="1">Без категории</option>
+          <option value="0">Добавить категорию</option>
+        </Forms.Select>
+
+        {
+          category === '0' && (
+            <Forms.TextField
+              label="Category title"
+              placeholder="Input category title"
+              error={formState.errors.new_category}
+              className={[cls.formLabel, cls.formInput, cls.error]}
+              {...register('new_category', { required: 'Required' })}
+            />
+          )
+        }
 
         <Forms.TextArea
           label="Description"
@@ -50,12 +89,10 @@ export const Create = () => {
           disabled={loaded}
         />
 
-        <Forms.Footer 
+        <Footer
           content={['', 'Go back']}
           to="/"
-          className={[cls.bottomText, cls.link]}
         />
-
       </form>
     </section>
   )
