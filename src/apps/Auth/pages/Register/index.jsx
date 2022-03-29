@@ -59,7 +59,6 @@ export const Register = () => {
           key={'1'}
           placeholder="example@email.com"
           error={formState.errors?.email ? formState.errors.email : regErrors?.email ? regErrors.email.toString() : ''}
-          className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('email', emailRules) }
         />
 
@@ -68,7 +67,6 @@ export const Register = () => {
           key={'2'}
           placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
           error={formState.errors?.password}
-          className={[cls.formLabel, cls.formInput, cls.error, cls.formEye]}
           id={cls.formPassword}
           { ...register('password', passwordRules) }
         />
@@ -78,7 +76,6 @@ export const Register = () => {
           key={'3'}
           placeholder="Ivan"
           error={formState.errors?.firstName}
-          className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('firstName', nameRules) }
         />
 
@@ -87,7 +84,6 @@ export const Register = () => {
           key={'4'}
           placeholder="Ivanov"
           error={formState.errors?.lastName}
-          className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('lastName', nameRules) }
         />
 
@@ -96,7 +92,6 @@ export const Register = () => {
           key={'5'}
           placeholder="example123"
           error={formState.errors?.alias ? formState.errors.alias : regErrors?.username ? regErrors.username.toString() : ''}
-          className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('alias', usernameRules) }
         />
         
@@ -105,7 +100,6 @@ export const Register = () => {
           key={'6'}
           placeholder="A-100; F-200"
           error={formState.errors?.group}
-          className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('group', groupRules) }
         />
 
@@ -113,7 +107,6 @@ export const Register = () => {
           label="Direction"
           key={'7'}
           error={formState.errors?.direction}
-          className={[cls.formLabel, cls.formInput, cls.error]}
           children={options}
           { ...register('direction', directionRules) }
         />
@@ -122,12 +115,10 @@ export const Register = () => {
           label="Date of Birth"
           key={'8'}
           error={formState.errors?.birthday}
-          className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('birthday', birthdayRules)}
         />
 
         <Forms.SubmitButton
-          className={cls.formSubmit}
           disabled={loaded}
         />
 

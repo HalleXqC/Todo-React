@@ -1,4 +1,5 @@
 import React from 'react'
+import cls from './Forms.module.scss'
 
 export const Select = React.forwardRef(({
   className = '',
@@ -10,26 +11,24 @@ export const Select = React.forwardRef(({
 }, ref) => {
 
   return (
-    <div>
-      <label className={className[0]}>
-        <p>{label}:</p>
-        <div>
-          <select
-            className={className[1]}
-            ref={ref}
-            disabled={disabled}
-            {...rest}
-          >
-            {children}
-          </select>
+    <label className={cls.formLabel}>
+      <p>{label}:</p>
+      <div>
+        <select
+          className={cls.formInput}
+          ref={ref}
+          disabled={disabled}
+          {...rest}
+        >
+          {children}
+        </select>
 
-          {error && 
-            <span className={className[2]}>
-              {error.message}
-            </span>
-          }
-        </div>
-      </label>
-    </div>
+        {error && 
+          <span className={cls.error}>
+            {error.message}
+          </span>
+        }
+      </div>
+    </label>
   )
 })

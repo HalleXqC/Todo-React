@@ -9,7 +9,6 @@ export const useGet = () => {
   const get = React.useCallback(() => {
     getTodos(token)
       .then(res => {
-        console.log(res);
         setBase(res.data)
       })
   }, [])

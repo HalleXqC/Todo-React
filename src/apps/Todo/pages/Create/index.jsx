@@ -23,12 +23,12 @@ export const Create = () => {
 
   const onSubmit = React.useCallback(data => {
     console.log(data)
-    // actions.post(data)
-    // reset({
-    //   title: '',
-    //   text: '',
-    // })
-  })
+    actions.post(data)
+    reset({
+      title: '',
+      text: '',
+    })
+  }, [])
 
   React.useEffect(() => {
     setValue('category', '1')
@@ -43,13 +43,11 @@ export const Create = () => {
           label="Title"
           placeholder="Cleaning"
           error={formState.errors.title}
-          className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('title', titleRules)}
         />
 
         <Forms.Select
           label="Category"
-          className={[cls.formLabel, cls.formInput, cls.error]}
           onChange={e => {
             reset({
               new_category: '',
@@ -69,7 +67,6 @@ export const Create = () => {
               label="Category title"
               placeholder="Input category title"
               error={formState.errors.new_category}
-              className={[cls.formLabel, cls.formInput, cls.error]}
               {...register('new_category', { required: 'Required' })}
             />
           )
@@ -79,13 +76,11 @@ export const Create = () => {
           label="Description"
           placeholder="Clean up the room"
           error={formState.errors.text}
-          className={[cls.formLabel, cls.formInput, cls.error]}
           id={cls.formArea}
           { ...register('text', textRules)}
         />
 
         <Forms.SubmitButton 
-          className={cls.formSubmit}
           disabled={loaded}
         />
 

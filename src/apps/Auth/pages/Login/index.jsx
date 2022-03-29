@@ -34,7 +34,6 @@ export const Login = () => {
           key={'123'}
           placeholder="example@gmail.com"
           error={formState.errors?.email}
-          className={[cls.formLabel, cls.formInput, cls.error]}
           { ...register('email', requiredRule) }
         />
 
@@ -43,7 +42,6 @@ export const Login = () => {
           key={'321'}
           placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
           error={formState.errors?.password}
-          className={[cls.formLabel, cls.formInput, cls.error, cls.formEye]}
           id={cls.formPassword}
           { ...register('password', requiredRule) }
         />
@@ -51,7 +49,6 @@ export const Login = () => {
         <p className={cls.error}>{authError && authError}</p>
 
         <Forms.SubmitButton 
-          className={cls.formSubmit}
           disabled={loaded}
         />
 

@@ -1,0 +1,80 @@
+.formLabel{
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  position: relative;
+  p{
+    margin: 0;
+    text-align: left;
+    margin: 0 10px 3px 0;
+    width: 25%;
+  }
+  div{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .formInput{
+      width: 100%;
+      outline: none;
+      border-radius: 5px;
+      background: none;
+      font-size: 16px;
+      font-family: inherit;
+      margin-bottom: 3px;
+      border: 1px solid rgb(200, 200, 200);
+      padding: 8px 16px ;
+      &:focus{
+          outline: 1pt solid rgb(120, 120, 120);
+      }
+    }
+    .formInput#formPassword{
+      padding-right: 2.5rem;
+    }
+    .formEye{
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+    }
+    .formInput#formArea{
+      resize: vertical;
+      min-height: 120px;
+      height: 120px;
+      max-height: 300px;
+    }
+    .error{
+      position: absolute;
+      font-size: 14px;
+      color: crimson;
+      width: 100%;
+      right: 50%;
+      bottom: -18px;
+      transform: translateX(50%);
+    }
+  }
+}
+.formSubmit{
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background: none;
+  font-size: 16px;
+  margin: 10px 10px 16px 10px;
+  background-color: #4169e1;
+  color: white;
+  padding: 12px 16px ;
+  cursor: pointer;
+  &:hover,
+  &:focus{
+      box-shadow: 0px 0px 5px #4169e1;
+  }
+  &:disabled,
+  &:disabled:focus,
+  &:disabled:hover{
+    background-color: #92a5dd;
+    box-shadow: none;
+  }
+}
