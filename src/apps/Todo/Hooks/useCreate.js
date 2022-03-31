@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+
 import { createTodo } from '../API'
 
 export const useCreate = () => {
@@ -7,7 +7,7 @@ export const useCreate = () => {
   const token = localStorage.getItem('userToken')
   const navigate = useNavigate()
 
-  const post = React.useCallback((data) => {
+  const post = React.useCallback(data => {
     setLoaded(true)
 
     createTodo(data, token)
@@ -17,7 +17,7 @@ export const useCreate = () => {
       .finally(() => {
         setLoaded(false)
       })
-  }, [])
+  }, [navigate, token])
 
   return {
     loaded,

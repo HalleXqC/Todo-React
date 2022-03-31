@@ -15,13 +15,12 @@ export const useRegister = () => {
         navigate('/auth/login')
       })
       .catch(err => {
-        console.log(err.response.data)
         setRegErrors(err.response.data)
       })
       .finally(() => {
         setLoaded(false)
       })
-  }, [])
+  }, [navigate])
 
   return {
     regErrors,

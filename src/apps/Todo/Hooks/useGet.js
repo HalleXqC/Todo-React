@@ -11,11 +11,11 @@ export const useGet = () => {
       .then(res => {
         setBase(res.data)
       })
-  }, [])
+  }, [token])
 
   React.useEffect(() => {
     get()
-  }, [])
+  }, [get])
 
   return base
 }

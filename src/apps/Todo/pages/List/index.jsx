@@ -6,8 +6,9 @@ import Todo from '../../../../components/Todo'
 
 export const List = () => {
 
-  const token = localStorage.getItem('userToken')
-  const database = useGet(token)
+  const database = useGet()
+
+  console.log(database)
 
   return (
     <section className={cls.root}>

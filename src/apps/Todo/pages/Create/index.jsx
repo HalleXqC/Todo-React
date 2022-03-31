@@ -3,8 +3,9 @@ import cls from './Create.module.scss'
 import { useForm } from 'react-hook-form'
 import { Forms } from '../../../../components/Forms'
 import { textRules, titleRules, } from '../../Tools/forms'
-import { useCreate } from '../../Hooks/useCreate'
 import Footer from '../../../../components/Footer'
+import { useTodos } from '../../Hooks/useTodos';
+import { useCategories } from '../../Hooks/useCategories';
 
 export const Create = () => {
 
@@ -18,22 +19,33 @@ export const Create = () => {
   } = useForm()
 
   const category = watch('category')
+  
+  const { actions, loaded } = useTodos()
 
-  const { actions, loaded } = useCreate()
+  const { categories, post, newCategory, error } = useCategories()
 
   const onSubmit = React.useCallback(data => {
-    console.log(data)
-    actions.post(data)
-    reset({
-      title: '',
-      text: '',
-    })
-  }, [])
+    const {new_category, category, ...rest} = data
+    
+    const newData = new_category ? {...rest, category: new_category} : {...rest, category}
+
+    post({name: newData.category})
+
+    // ПРОБЛЕМАААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА
+
+    console.log(newCategory)
+
+    // actions.post(newData)
+    // reset({
+    //   title: '',
+    //   text: '',
+    // })
+  }, [actions, reset, post])
 
   React.useEffect(() => {
     setValue('category', '1')
     register('category')
-  }, [])
+  }, [register, setValue])
 
   return (
     <section className={cls.root}>
@@ -45,7 +57,6 @@ export const Create = () => {
           error={formState.errors.title}
           { ...register('title', titleRules)}
         />
-
         <Forms.Select
           label="Category"
           onChange={e => {
@@ -57,7 +68,11 @@ export const Create = () => {
             setValue('category', value)
           }}
         >
-          <option defaultChecked value="1">Без категории</option>
+          {
+            categories && categories.map(item => (
+              <option value={item.id} key={item.id} >{item.name}</option>
+            ))
+          }
           <option value="0">Добавить категорию</option>
         </Forms.Select>
 
@@ -66,8 +81,8 @@ export const Create = () => {
             <Forms.TextField
               label="Category title"
               placeholder="Input category title"
-              error={formState.errors.new_category}
-              {...register('new_category', { required: 'Required' })}
+              error={formState.errors?.new_category ? formState.errors.new_category : error.toString()}
+              {...register('new_category', { required: 'Обязательное поле' })}
             />
           )
         }
