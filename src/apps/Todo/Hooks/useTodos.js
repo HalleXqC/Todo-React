@@ -1,12 +1,14 @@
 import React from 'react'
-import { deleteTodo, completeTodo, createTodo, addCategory } from '../API'
+import { deleteTodo, completeTodo, createTodo } from '../API'
 import { useNavigate } from 'react-router-dom'
 
 export const useTodos = () => {
   const [loaded, setLoaded] = React.useState(false)
+  const [createError, setError] = React.useState('')
   const token = localStorage.getItem('userToken')
-  const navigate = useNavigate()
 
+  const navigate = useNavigate()
+  
   const remove = React.useCallback(id => {
     setLoaded(true)
 
@@ -32,6 +34,9 @@ export const useTodos = () => {
       .then(() => {
         navigate('/')
       })
+      .catch(err => {
+        setError(err.response.data)
+      })
       .finally(() => {
         setLoaded(false)
       })
@@ -39,6 +44,7 @@ export const useTodos = () => {
 
   return {
     loaded,
+    createError,
     actions: {
       remove,
       patch,

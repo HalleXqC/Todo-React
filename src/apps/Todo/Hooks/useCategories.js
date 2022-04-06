@@ -1,10 +1,9 @@
 import React from 'react'
-import { addCategory, getCategories } from '../API/index';
+import { addCategory, getCategories } from '../API';
 
 export const useCategories = () => {
 
   const [categories, setCategories] = React.useState([])
-  const [newCategory, setNewCategory] = React.useState('')
   const [error, setError] = React.useState('')
   const token = localStorage.getItem('userToken')
 
@@ -17,12 +16,22 @@ export const useCategories = () => {
 
   const post = React.useCallback(data => {
 
-    addCategory(token, data)
-      .then(res => {
-        setNewCategory(res.data)
-      })
-      .catch(err => setError(err.response.data))
+    const promise = new Promise((resolve, reject) => {
+      addCategory(token, data)
+        .then(res => {
+          resolve(res.data)
+        })
+        .catch(err => {
+          setError(err.response.data)
+          reject()
+        })
+    })
+
+    return promise
+
   }, [token])
+
+
 
   React.useEffect(() => {
     get()
@@ -30,7 +39,6 @@ export const useCategories = () => {
 
   return {
     categories,
-    newCategory,
     error,
     post,
   }

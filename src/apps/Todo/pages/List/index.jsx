@@ -1,29 +1,33 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import cls from './List.module.scss'
-import { useGet } from '../../Hooks/useGet'
+import { useGet } from '../../Hooks/useList'
 import Todo from '../../../../components/Todo'
+import { useCategories } from '../../Hooks/useCategories';
+import Loader from '../../../../components/Loader'
+import { getCategoryName } from '../../Tools'
 
 export const List = () => {
+  const { base } = useGet()
+  const { categories } = useCategories()
 
-  const database = useGet()
-
-  console.log(database)
-
+  if (!base) return <Loader />
   return (
     <section className={cls.root}>
       <div className={cls.todos}>
         {
-          database && database.map(({title, text, category, id, is_done}, index) => (
+          !base.length && <h1 className={cls.error}>No todos yet</h1>
+        }
+        {
+          base.map(({ title, text, category, id, is_done }) => (
             <Todo
               title={title}
               text={text}
-              category={category}
+              category={getCategoryName(categories, category)}
               id={id}
               is_done={is_done}
-              key={index}
-            />
-          ))
+              key={id}
+            />))
         }
       </div>
 

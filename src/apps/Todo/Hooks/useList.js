@@ -3,7 +3,7 @@ import { getTodos } from '../API'
 
 export const useGet = () => {
 
-  const [base, setBase] = React.useState([])
+  const [base, setBase] = React.useState(null)
   const token = localStorage.getItem('userToken')
 
   const get = React.useCallback(() => {
@@ -17,5 +17,7 @@ export const useGet = () => {
     get()
   }, [get])
 
-  return base
+  return {
+    base,
+  }
 }

@@ -4,10 +4,11 @@ import { useForm } from 'react-hook-form'
 import { Forms } from '../../../../components/Forms'
 import { textRules, titleRules, } from '../../Tools/forms'
 import Footer from '../../../../components/Footer'
-import { useTodos } from '../../Hooks/useTodos';
-import { useCategories } from '../../Hooks/useCategories';
+import { useTodos } from '../../Hooks/useTodos'
+import { useCategories } from '../../Hooks/useCategories'
 
 export const Create = () => {
+  const [newCategory, setCategory] = React.useState(false)
 
   const {
     register,
@@ -15,37 +16,45 @@ export const Create = () => {
     formState,
     setValue,
     reset,
-    watch,
   } = useForm()
-
-  const category = watch('category')
   
-  const { actions, loaded } = useTodos()
+  const { actions, loaded, createError } = useTodos()
 
-  const { categories, post, newCategory, error } = useCategories()
+  const { categories, post } = useCategories()
 
   const onSubmit = React.useCallback(data => {
-    const {new_category, category, ...rest} = data
+
+    if (newCategory) {
+      post({name: data.category})
+      .then(res => {
+        actions.post({...data, category: res.id})
+        reset({
+          title: '',
+          category: '0',
+          text: '',
+        })
+      })
+    } else {
+      actions.post(data)
+      reset({
+        title: '',
+        category: '0',
+        text: '',
+      })
+    }
     
-    const newData = new_category ? {...rest, category: new_category} : {...rest, category}
-
-    post({name: newData.category})
-
-    // ПРОБЛЕМАААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА
-
-    console.log(newCategory)
-
-    // actions.post(newData)
-    // reset({
-    //   title: '',
-    //   text: '',
-    // })
-  }, [actions, reset, post])
+    
+  }, [actions, reset, post, newCategory])
 
   React.useEffect(() => {
-    setValue('category', '1')
-    register('category')
+    register('category', {
+      required: 'Обязательное поле',
+    })
   }, [register, setValue])
+
+  React.useEffect(() => {
+    setValue('category', '')
+  }, [])
 
   return (
     <section className={cls.root}>
@@ -59,15 +68,20 @@ export const Create = () => {
         />
         <Forms.Select
           label="Category"
+          error={formState.errors.category}
           onChange={e => {
-            reset({
-              new_category: '',
-            })
-
             const value = e.currentTarget.value
             setValue('category', value)
+
+            if (value !== '0') return setCategory(false)
+
+            setCategory(true)
+            reset({
+              category: '',
+            })
           }}
         >
+          <option defaultChecked value="">Выберите категорию</option>
           {
             categories && categories.map(item => (
               <option value={item.id} key={item.id} >{item.name}</option>
@@ -77,12 +91,15 @@ export const Create = () => {
         </Forms.Select>
 
         {
-          category === '0' && (
+          newCategory && (
             <Forms.TextField
               label="Category title"
               placeholder="Input category title"
-              error={formState.errors?.new_category ? formState.errors.new_category : error.toString()}
-              {...register('new_category', { required: 'Обязательное поле' })}
+              error={createError.category}
+              onChange={e => {
+                const value = e.currentTarget.value
+                setValue('category', value)
+              }}
             />
           )
         }
