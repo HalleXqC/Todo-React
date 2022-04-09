@@ -3,9 +3,9 @@ import cls from './Create.module.scss'
 import { useForm } from 'react-hook-form'
 import { Forms } from '../../../../components/Forms'
 import { textRules, titleRules, } from '../../Tools/forms'
-import Footer from '../../../../components/Footer'
 import { useCategories } from '../../Hooks/useCategories'
 import { useCreate } from '../../Hooks/useCreate'
+import { Link } from 'react-router-dom'
 
 export const Create = () => {
   const [newCategory, setCategory] = React.useState(false)
@@ -116,10 +116,12 @@ export const Create = () => {
           disabled={loaded}
         />
 
-        <Footer
-          content={['', 'Go back']}
-          to="/"
-        />
+        <div className={cls.bottomText}>
+          <Link 
+            to="/"
+            className={cls.link}
+          >Go back</Link>
+        </div>
       </form>
     </section>
   )

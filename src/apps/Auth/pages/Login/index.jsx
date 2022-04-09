@@ -2,9 +2,9 @@ import React from 'react'
 import cls from './Login.module.scss'
 import { useForm } from 'react-hook-form'
 import { requiredRule } from '../../Tools/forms'
-import { useLogin } from '../../Hooks/useLogin';
+import { useLogin } from '../../Hooks/useLogin'
 import { Forms } from '../../../../components/Forms'
-import Footer from '../../../../components/Footer';
+import { Link } from 'react-router-dom'
 
 export const Login = () => {
   const {
@@ -52,10 +52,15 @@ export const Login = () => {
           disabled={loaded}
         />
 
-        <Footer
-          content={["Don't have account yet?", 'Sign up']}
-          to="/auth/register"
-        />
+        <div className={cls.bottomText}>
+          <p>
+            Don't have account yet? &nbsp;
+            <Link 
+              to="/auth/register"
+              className={cls.link}
+            >Sign up</Link>
+          </p>
+        </div>
         
       </form>
     </div>

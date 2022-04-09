@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import cls from './List.module.scss'
 import { useList } from '../../Hooks/useList'
 import Todo from '../../../../components/Todo'
-import { useCategories } from '../../Hooks/useCategories';
+import { useCategories } from '../../Hooks/useCategories'
 import Loader from '../../../../components/Loader'
 import { getCategoryName } from '../../Tools'
 

@@ -19,5 +19,16 @@
     .error{
       color: crimson;
     }
+    .bottomText{
+      .link{
+        font-size: 14px;
+        margin: 0;
+        text-decoration: inherit;
+        color: #4169e1;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+    }
   }
 }

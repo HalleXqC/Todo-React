@@ -10,10 +10,10 @@ import {
   nameRules,
   passwordRules,
 } from "../../Tools/forms"
-import { calculateAge } from '../../Tools/calculateAge';
+import { calculateAge } from '../../Tools/calculateAge'
 import { useRegister } from '../../Hooks/useRegister'
 import { Forms } from '../../../../components/Forms'
-import Footer from '../../../../components/Footer';
+import { Link } from 'react-router-dom'
 
 export const Register = () => {
   const {
@@ -122,10 +122,15 @@ export const Register = () => {
           disabled={loaded}
         />
 
-        <Footer
-          content={['Already have account?', 'Sign in']}
-          to="/auth/login"
-        />
+        <div className={cls.bottomText}>
+          <p>
+            Already have account? &nbsp;
+            <Link 
+              to="/auth/login"
+              className={cls.link}
+            >Sign in</Link>
+          </p>
+        </div>
 
       </form>
     </div>
