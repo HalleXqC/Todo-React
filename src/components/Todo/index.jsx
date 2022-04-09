@@ -2,14 +2,11 @@ import React from 'react'
 import cls from './Todos.module.scss'
 import { AiOutlineDelete as Delete, AiOutlineEdit as Edit} from 'react-icons/ai'
 import { BsCheckLg as Complete} from 'react-icons/bs'
-import { useTodos } from '../../apps/Todo/Hooks/useTodos'
 
-const Todo = ({ title, text, category, id, is_done }) => {
-
-  const { loaded, actions } = useTodos()
+const Todo = ({ title, text, category, id, is_done, onDelete, onComplete, loaded }) => {
 
   const complete = () => {
-    actions.patch(
+    onComplete(
       id,
       {
         is_done: !is_done,
@@ -38,7 +35,7 @@ const Todo = ({ title, text, category, id, is_done }) => {
         <button 
           className={cls.button} 
           id={cls.delete}
-          onClick={() => actions.remove(id)}
+          onClick={() => onDelete(id)}
           disabled={loaded}
         >
           <Delete className={cls.icon} />

@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import cls from './List.module.scss'
-import { useGet } from '../../Hooks/useList'
+import { useList } from '../../Hooks/useList'
 import Todo from '../../../../components/Todo'
 import { useCategories } from '../../Hooks/useCategories';
 import Loader from '../../../../components/Loader'
 import { getCategoryName } from '../../Tools'
 
 export const List = () => {
-  const { base } = useGet()
+  const { base, actions, loaded } = useList()
   const { categories } = useCategories()
 
   if (!base) return <Loader />
@@ -25,6 +25,9 @@ export const List = () => {
               text={text}
               category={getCategoryName(categories, category)}
               id={id}
+              onDelete={actions.remove}
+              onComplete={actions.complete}
+              loaded={loaded}
               is_done={is_done}
               key={id}
             />))

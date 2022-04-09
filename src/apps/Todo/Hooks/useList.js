@@ -1,9 +1,11 @@
 import React from 'react'
-import { getTodos } from '../API'
+import { completeTodo, deleteTodo, getTodos } from '../API'
 
-export const useGet = () => {
+export const useList = () => {
 
-  const [base, setBase] = React.useState(null)
+  const [base, setBase] = React.useState('')
+
+  const [loaded, setLoaded] = React.useState(false)
   const token = localStorage.getItem('userToken')
 
   const get = React.useCallback(() => {
@@ -13,11 +15,36 @@ export const useGet = () => {
       })
   }, [token])
 
+  const remove = React.useCallback(id => {
+    setLoaded(true)
+
+    deleteTodo(token, id)
+    .then(get)
+    .finally(() => {
+      setLoaded(false)
+    })
+  }, [token, get])
+
+  const complete = React.useCallback((id, data) => {
+    setLoaded(true)
+
+    completeTodo(token, id, data)
+    .then(get)
+    .finally(() => {
+      setLoaded(false)
+    })
+  }, [token, get])
+
   React.useEffect(() => {
     get()
   }, [get])
 
   return {
     base,
+    loaded,
+    actions: {
+      remove,
+      complete,
+    },
   }
 }

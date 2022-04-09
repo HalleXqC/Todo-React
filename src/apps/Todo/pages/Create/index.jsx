@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form'
 import { Forms } from '../../../../components/Forms'
 import { textRules, titleRules, } from '../../Tools/forms'
 import Footer from '../../../../components/Footer'
-import { useTodos } from '../../Hooks/useTodos'
 import { useCategories } from '../../Hooks/useCategories'
+import { useCreate } from '../../Hooks/useCreate'
 
 export const Create = () => {
   const [newCategory, setCategory] = React.useState(false)
@@ -18,7 +18,7 @@ export const Create = () => {
     reset,
   } = useForm()
   
-  const { actions, loaded, createError } = useTodos()
+  const { actions, loaded, createError } = useCreate()
 
   const { categories, post } = useCategories()
 
@@ -54,7 +54,7 @@ export const Create = () => {
 
   React.useEffect(() => {
     setValue('category', '')
-  }, [])
+  }, [setValue])
 
   return (
     <section className={cls.root}>
