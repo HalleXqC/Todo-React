@@ -1,17 +1,17 @@
 import React from 'react'
 import { createTodo } from '../API'
 import { useNavigate } from 'react-router-dom'
+import { addCategory } from '../API'
 
 export const useCreate = () => {
   const [loaded, setLoaded] = React.useState(false)
   const [createError, setError] = React.useState('')
-  const token = localStorage.getItem('userToken')
   const navigate = useNavigate()
 
   const post = React.useCallback(data => {
     setLoaded(true)
 
-    createTodo(token, data)
+    createTodo(data)
       .then(() => {
         navigate('/')
       })
@@ -21,13 +21,24 @@ export const useCreate = () => {
       .finally(() => {
         setLoaded(false)
       })
-  }, [navigate, token])
+  }, [navigate])
+
+  const postWithCategory = React.useCallback((categoryData, todoData) => {
+    addCategory(categoryData)
+      .then(res => {
+        post({...todoData, category: res.data.id})
+      })
+      .catch(err => {
+        setError(err.response.data)
+      })
+  }, [post])
 
   return {
     loaded,
     createError,
     actions: {
       post,
+      postWithCategory,
     },
   }
 }

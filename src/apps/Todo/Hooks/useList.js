@@ -6,34 +6,33 @@ export const useList = () => {
   const [base, setBase] = React.useState('')
 
   const [loaded, setLoaded] = React.useState(false)
-  const token = localStorage.getItem('userToken')
 
   const get = React.useCallback(() => {
-    getTodos(token)
+    getTodos()
       .then(res => {
         setBase(res.data)
       })
-  }, [token])
+  }, [])
 
   const remove = React.useCallback(id => {
     setLoaded(true)
 
-    deleteTodo(token, id)
+    deleteTodo(id)
     .then(get)
     .finally(() => {
       setLoaded(false)
     })
-  }, [token, get])
+  }, [get])
 
   const complete = React.useCallback((id, data) => {
     setLoaded(true)
 
-    completeTodo(token, id, data)
+    completeTodo(id, data)
     .then(get)
     .finally(() => {
       setLoaded(false)
     })
-  }, [token, get])
+  }, [get])
 
   React.useEffect(() => {
     get()

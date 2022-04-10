@@ -20,31 +20,15 @@ export const Create = () => {
   
   const { actions, loaded, createError } = useCreate()
 
-  const { categories, post } = useCategories()
+  const { categories } = useCategories()
 
   const onSubmit = React.useCallback(data => {
-
     if (newCategory) {
-      post({name: data.category})
-      .then(res => {
-        actions.post({...data, category: res.id})
-        reset({
-          title: '',
-          category: '0',
-          text: '',
-        })
-      })
+      actions.postWithCategory({name: data.category}, data)
     } else {
       actions.post(data)
-      reset({
-        title: '',
-        category: '0',
-        text: '',
-      })
     }
-    
-    
-  }, [actions, reset, post, newCategory])
+  }, [actions, newCategory])
 
   React.useEffect(() => {
     register('category', {

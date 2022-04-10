@@ -1,49 +1,52 @@
-import instance from "../../../configs";
+import instance from "../../../configs"
+import { headers } from "../Tools"
 
-export const createTodo = (user, data) => {
+
+export const createTodo = data => {
   return instance.post('/todo/create/', data, {
-    headers: {
-      'Authorization': `Token ${user}`
-    }
+    headers,
   })
 }
 
-export const getTodos = user => {
+export const getTodos = () => {
   return instance.get('/todo/all/', {
-    headers: {
-      'Authorization': `Token ${user}`
-    }
+    headers,
   })
 }
 
-export const deleteTodo = (user, id) => {
+export const deleteTodo = id => {
   return instance.delete(`/todo/detail/${id}/`, {
-    headers: {
-      'Authorization' : `Token ${user}`
-    }
+    headers,
   })
 }
 
-export const completeTodo = (user, id, data) => {
+export const completeTodo = (id, data) => {
   return instance.patch(`/todo/detail/${id}/`, data, {
-    headers: {
-      'Authorization': `Token ${user}`
-    }
+    headers,
   })
 }
 
-export const getCategories = user => {
+export const getCategories = () => {
   return instance.get(`/category/`, {
-    headers: {
-      'Authorization': `Token ${user}`
-    }
+    headers,
   })
 }
 
-export const addCategory = (user, data) => {
+export const addCategory = data => {
   return instance.post(`/category/create/`, data, {
-    headers: {
-      'Authorization': `Token ${user}`
-    }
+    headers,
+  })
+}
+
+
+export const getSingleTodo = id => {
+  return instance.get(`/todo/detail/${id}/`, {
+    headers,
+  })
+}
+
+export const editTodo = (id, data) => {
+  return instance.patch(`/todo/detail/${id}/`, data, {
+    headers,
   })
 }

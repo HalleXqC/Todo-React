@@ -3,10 +3,10 @@
   .todos{
     width: auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-
+    
     .error{
       font-size: 30px;
       text-transform: uppercase;
@@ -14,9 +14,6 @@
       word-spacing: 5px;
     }
   }
-
-
-
 
   .addBtn{
     position: fixed;

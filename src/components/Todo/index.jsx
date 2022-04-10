@@ -2,6 +2,7 @@ import React from 'react'
 import cls from './Todos.module.scss'
 import { AiOutlineDelete as Delete, AiOutlineEdit as Edit} from 'react-icons/ai'
 import { BsCheckLg as Complete} from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 
 const Todo = ({ title, text, category, id, is_done, onDelete, onComplete, loaded }) => {
 
@@ -50,12 +51,13 @@ const Todo = ({ title, text, category, id, is_done, onDelete, onComplete, loaded
           <Complete className={cls.icon} />
         </button>
 
-        <button 
+        <Link
           className={cls.button} 
           id={cls.edit}
+          to={`/todo/${id}`}
         >
           <Edit className={cls.icon} />
-        </button>
+        </Link>
       </div>
     </div>
   )
