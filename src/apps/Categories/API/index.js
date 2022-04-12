@@ -12,3 +12,9 @@ export const getCategory = id => {
     headers,
   })
 }
+
+export const deleteCategory = id => {
+  return instance.delete(`/category/detail/${id}`, {
+    headers,
+  })
+}

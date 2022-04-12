@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import cls from './List.module.scss'
 import { useList } from '../../Hooks/useList'
 import Todo from '../../../../components/Todo'
 import { useCategories } from '../../../Categories/Hooks/useCategories'
 import Loader from '../../../../components/Loader'
 import { getCategoryName } from '../../Tools'
+import Sidebar from '../../../../components/Sidebar'
 
 export const List = () => {
   const { base, actions, loaded } = useList('')
@@ -15,6 +15,7 @@ export const List = () => {
   if (!categories) return null
   return (
     <section className={cls.root}>
+      <Sidebar />
       <div className={cls.todos}>
         {
           !base.length && <h1 className={cls.error}>No todos yet</h1>
@@ -34,10 +35,6 @@ export const List = () => {
             />))
         }
       </div>
-
-      <Link to="/create" className={cls.addBtn}>
-        <img src="/img/addTodoLogo.png" alt="logo" />
-      </Link>
     </section>
   )
 }
