@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom'
 import cls from './List.module.scss'
 import { useList } from '../../Hooks/useList'
 import Todo from '../../../../components/Todo'
-import { useCategories } from '../../Hooks/useCategories'
+import { useCategories } from '../../../Categories/Hooks/useCategories'
 import Loader from '../../../../components/Loader'
 import { getCategoryName } from '../../Tools'
 
 export const List = () => {
-  const { base, actions, loaded } = useList()
+  const { base, actions, loaded } = useList('')
   const { categories } = useCategories()
 
   if (!base) return <Loader />
+  if (!categories) return null
   return (
     <section className={cls.root}>
       <div className={cls.todos}>

@@ -1,18 +1,18 @@
 import React from 'react'
 import { completeTodo, deleteTodo, getTodos } from '../API'
 
-export const useList = () => {
+export const useList = category => {
 
   const [base, setBase] = React.useState('')
 
   const [loaded, setLoaded] = React.useState(false)
 
   const get = React.useCallback(() => {
-    getTodos()
-      .then(res => {
-        setBase(res.data)
-      })
-  }, [])
+    getTodos(category)
+    .then(res => {
+      setBase(res.data)
+    })
+  }, [category])
 
   const remove = React.useCallback(id => {
     setLoaded(true)

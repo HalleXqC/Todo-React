@@ -3,9 +3,9 @@ import cls from './Create.module.scss'
 import { useForm } from 'react-hook-form'
 import { Forms } from '../../../../components/Forms'
 import { textRules, titleRules, } from '../../Tools/forms'
-import { useCategories } from '../../Hooks/useCategories'
 import { useCreate } from '../../Hooks/useCreate'
 import { Link } from 'react-router-dom'
+import { useCategories } from '../../../Categories/Hooks/useCategories'
 
 export const Create = () => {
   const [newCategory, setCategory] = React.useState(false)

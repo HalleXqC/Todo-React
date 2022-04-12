@@ -1,17 +1,15 @@
 import React from 'react'
 import cls from './Page.module.scss'
-import { useParams } from 'react-router-dom'
 import { usePage } from '../../Hooks/usePage'
 import Loader from '../../../../components/Loader/index'
 import { useForm } from 'react-hook-form'
 import { Forms } from '../../../../components/Forms'
 import { textRules, titleRules, } from '../../Tools/forms'
-import { useCategories } from '../../Hooks/useCategories'
+import { useCategories } from '../../../Categories/Hooks/useCategories'
 import { Link } from 'react-router-dom'
 
 export const Page = () => {
 
-  const { id } = useParams()
 
   const [newCategory, setCategory] = React.useState(false)
 
@@ -25,7 +23,7 @@ export const Page = () => {
   
   const { categories } = useCategories()
 
-  const { singleTodo, loaded, actions, categoryError } = usePage(id)
+  const { singleTodo, loaded, actions, categoryError } = usePage()
 
   const onSubmit = React.useCallback(data => {
     if (newCategory) {
@@ -46,17 +44,15 @@ export const Page = () => {
   }, [setValue])
 
   React.useEffect(() => {
-    if (singleTodo) {
-      reset({
-        title: singleTodo.title,
-        category: singleTodo.category,
-        text: singleTodo.text,
-      })
-    }
+    reset({
+      title: singleTodo?.title,
+      category: singleTodo?.category,
+      text: singleTodo?.text,
+    })
   }, [reset, singleTodo])
-  
 
   if (!singleTodo) return <Loader/>
+  if (!categories) return null
   return (
     <section className={cls.root}>
       <h1 className={cls.title}>Edit todo</h1>
@@ -84,14 +80,13 @@ export const Page = () => {
           }}
         >
           {
-            categories && categories.map(item => (
+            [...categories, {id: 0, name: 'Новая категория'}].map(item => (
               <option 
                 value={item.id}
                 key={item.id}
               >{item.name}</option>
             ))
           }
-          <option value="0">Добавить категорию</option>
         </Forms.Select>
 
         {

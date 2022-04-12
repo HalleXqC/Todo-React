@@ -8,8 +8,8 @@ export const createTodo = data => {
   })
 }
 
-export const getTodos = () => {
-  return instance.get('/todo/all/', {
+export const getTodos = query => {
+  return instance.get(`/todo/all/${query}`, {
     headers,
   })
 }
@@ -22,12 +22,6 @@ export const deleteTodo = id => {
 
 export const completeTodo = (id, data) => {
   return instance.patch(`/todo/detail/${id}/`, data, {
-    headers,
-  })
-}
-
-export const getCategories = () => {
-  return instance.get(`/category/`, {
     headers,
   })
 }

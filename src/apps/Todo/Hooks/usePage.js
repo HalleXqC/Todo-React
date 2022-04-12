@@ -1,10 +1,13 @@
 import React from 'react'
 import { addCategory, editTodo, getSingleTodo } from '../API'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-export const usePage = id => {
+export const usePage = () => {
 
-  const [ singleTodo, setSingleTodo ] = React.useState('')
+  const { id } = useParams()
+
+  const [ singleTodo, setSingleTodo ] = React.useState(null)
 
   const [ loaded, setLoaded ] = React.useState(false)
 
