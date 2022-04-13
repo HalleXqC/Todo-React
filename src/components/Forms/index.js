@@ -4,6 +4,7 @@ import { Password } from './Password'
 import { Date } from './Date'
 import { SubmitButton } from './SubmitButton'
 import { TextArea } from './TextArea'
+import { CategoryField } from './CategoryField'
 
 export const Forms = {
   TextField,
@@ -12,4 +13,5 @@ export const Forms = {
   Date,
   SubmitButton,
   TextArea,
+  CategoryField,
 }

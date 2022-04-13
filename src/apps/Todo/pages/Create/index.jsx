@@ -6,6 +6,7 @@ import { textRules, titleRules, } from '../../Tools/forms'
 import { useCreate } from '../../Hooks/useCreate'
 import { Link } from 'react-router-dom'
 import { useCategories } from '../../../Categories/Hooks/useCategories'
+import { BsArrowReturnLeft as ArrowLeft } from 'react-icons/bs'
 
 export const Create = () => {
   const [newCategory, setCategory] = React.useState(false)
@@ -107,6 +108,10 @@ export const Create = () => {
           >Go back</Link>
         </div>
       </form>
+
+      <Link to="/" className={cls.return}>
+        <ArrowLeft />
+      </Link>
     </section>
   )
 }

@@ -52,7 +52,7 @@ export const Page = () => {
   }, [reset, singleTodo])
 
   if (!singleTodo) return <Loader/>
-  if (!categories) return null
+  if (!categories) return <Loader/>
   return (
     <section className={cls.root}>
       <h1 className={cls.title}>Edit todo</h1>

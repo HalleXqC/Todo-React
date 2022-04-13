@@ -8,7 +8,7 @@ const Sidebar = () => {
     <div className={cls.root}>
       <Link 
         to="/" 
-        className={`${cls.btn} ${cls.settings}`}
+        className={cls.btn}
         title="All Todos"
       >
         <img src="/img/back.png" alt="logo" />
@@ -22,7 +22,7 @@ const Sidebar = () => {
       </Link>
       <Link 
         to="/category/settings" 
-        className={`${cls.btn} ${cls.settings}`} 
+        className={cls.btn} 
         title="Category settings"
       >
         <img src="/img/settings.png" alt="logo" />

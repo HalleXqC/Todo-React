@@ -18,3 +18,9 @@ export const deleteCategory = id => {
     headers,
   })
 }
+
+export const editCategory = (id, data) => {
+  return instance.patch(`/category/detail/${id}`, data, {
+    headers,
+  })
+}

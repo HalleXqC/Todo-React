@@ -12,7 +12,7 @@ export const List = () => {
   const { categories } = useCategories()
 
   if (!base) return <Loader />
-  if (!categories) return null
+  if (!categories) return <Loader/>
   return (
     <section className={cls.root}>
       <Sidebar />

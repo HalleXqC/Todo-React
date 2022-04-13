@@ -27,6 +27,7 @@ export const Settings = () => {
               id={item.id}
               loaded={loaded}
               onDelete={actions.remove}
+              onEdit={actions.edit}
               key={item.id}
             />
           ))

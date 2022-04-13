@@ -1,5 +1,5 @@
 import React from 'react'
-import { getCategories, getCategory } from '../API'
+import { editCategory, getCategories, getCategory } from '../API'
 import { useParams } from 'react-router-dom'
 import { deleteCategory } from '../API/index'
 
@@ -35,6 +35,18 @@ export const useCategories = () => {
     })
   }
 
+  const edit = id => {
+    setLoaded(true)
+
+    editCategory(id, {name: prompt('New name of category...')})
+    .then(get)
+    .finally(() => {
+      setLoaded(false)
+    })
+  }
+
+  
+
   React.useEffect(() => {
     get()
     if (id) getSingleCategory(id)
@@ -46,6 +58,7 @@ export const useCategories = () => {
     loaded,
     actions: {
       remove,
+      edit,
     }
   }
 }

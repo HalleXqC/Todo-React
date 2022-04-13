@@ -78,3 +78,44 @@
     box-shadow: none;
   }
 }
+
+
+
+
+.formLabel.formCategory{
+  transform: translateY(1em);
+  div{
+    .formInput{
+      width: 90%;
+      padding-right: 35px;
+    }
+    .submit{
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: translate(-75%, 6px);
+      border-radius: 100%;
+      border: none;
+      outline: none;
+      background-color: #4169e1;
+      width: 25px;
+      height: 25px;
+      transition: .3s;
+      cursor: pointer;
+      .icon{
+        color: white;
+        font-size: 15px;
+      } 
+      &:hover{
+        box-shadow: 0 0 3px #4169e1;
+      }
+      &:disabled{
+        opacity: 0.5;
+        pointer-events: none;
+        &:hover{
+          box-shadow: 0 0 0 0;
+        }
+      }
+    }
+  }
+}

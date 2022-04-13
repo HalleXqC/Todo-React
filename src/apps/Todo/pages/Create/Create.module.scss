@@ -31,4 +31,22 @@
       }
     }
   }
+  .return{
+    background: #4169e1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    border-radius: 100%;
+    color: white;
+    font-size: 32px;
+    position: fixed;
+    left: 2rem;
+    bottom: 2rem;
+    transition: .3s;
+    &:hover{
+      box-shadow: 0 0 5px #4169e1;
+    }
+  }
 }

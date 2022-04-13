@@ -1,5 +1,5 @@
 import React from 'react'
-import cls from './List.module.scss'
+import cls from './CategoryList.module.scss'
 import { Link, useParams } from 'react-router-dom'
 import { useList } from '../../../Todo/Hooks/useList'
 import Loader from '../../../../components/Loader'
@@ -17,7 +17,7 @@ export const CategoryList = () => {
 
 
   if (!base) return <Loader/>
-  if (!category) return null  
+  if (!category) return <Loader/>  
   return (
     <section className={cls.root}>
       <h1 className={cls.category}>
