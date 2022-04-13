@@ -8,6 +8,7 @@ export const useCategories = () => {
   const [categories, setCategories] = React.useState(null)
   const [category, setCategory] = React.useState(null)
   const [loaded, setLoaded] = React.useState(false)
+  const [categoryError, setError] = React.useState('')
 
   const { id } = useParams()
 
@@ -35,11 +36,17 @@ export const useCategories = () => {
     })
   }
 
-  const edit = id => {
+  const edit = (id, data) => {
     setLoaded(true)
 
-    editCategory(id, {name: prompt('New name of category...')})
-    .then(get)
+    editCategory(id, data)
+    .then(() => {
+      get()
+      setError('')
+    })
+    .catch(error => {
+      setError(error.response)
+    })
     .finally(() => {
       setLoaded(false)
     })
@@ -56,6 +63,7 @@ export const useCategories = () => {
     categories,
     category,
     loaded,
+    categoryError,
     actions: {
       remove,
       edit,

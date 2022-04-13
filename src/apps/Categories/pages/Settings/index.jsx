@@ -7,7 +7,7 @@ import Category from '../../../../components/Category'
 
 export const Settings = () => {
 
-  const { categories, loaded, actions } = useCategories()
+  const { categories, loaded, actions, categoryError} = useCategories()
 
   const newCategories = categories?.slice(1)
 
@@ -26,6 +26,7 @@ export const Settings = () => {
               category={item.name}
               id={item.id}
               loaded={loaded}
+              categoryError={categoryError}
               onDelete={actions.remove}
               onEdit={actions.edit}
               key={item.id}

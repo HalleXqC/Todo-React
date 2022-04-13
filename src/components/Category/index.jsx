@@ -2,10 +2,25 @@ import React from 'react'
 import cls from './Category.module.scss'
 import { AiOutlineDelete as Delete, AiOutlineEdit as Edit} from 'react-icons/ai'
 import { Forms } from '../Forms'
+import { useForm } from 'react-hook-form';
 
-const Category = ({category, onDelete, onEdit, id, loaded}) => {
+const Category = ({category, onDelete, onEdit, id, loaded, categoryError}) => {
 
   const [isEdit, setIsEdit] = React.useState(false)
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState,
+  } = useForm()
+
+  const onSubmit = React.useCallback(data => {
+    onEdit(id, data)
+    reset({
+      name: ''
+    })
+  }, [id, onEdit, reset])
 
   return (
     <div className={cls.card}>
@@ -35,7 +50,14 @@ const Category = ({category, onDelete, onEdit, id, loaded}) => {
       </div>
 
       {
-        isEdit && <Forms.CategoryField placeholder="New category title" disabled={loaded} onClick={() => onEdit(id)} />
+        isEdit && 
+        <Forms.CategoryField
+          placeholder="New category title"
+          disabled={loaded}
+          onClick={handleSubmit(onSubmit)}
+          error={formState.errors?.name ? formState.errors.name.message : categoryError ? 'Такая категория уже существует!' : ''}
+          {...register('name', {required: 'Обязательное поле'})}
+        />
       }
       
     </div>

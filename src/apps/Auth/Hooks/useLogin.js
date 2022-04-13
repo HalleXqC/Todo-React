@@ -21,7 +21,7 @@ export const useLogin = () => {
       .finally(() => {
         setLoaded(false)
       })
-  }, [])
+  }, [navigate])
 
   return {
     authError,

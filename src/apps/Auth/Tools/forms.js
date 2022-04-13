@@ -1,9 +1,9 @@
 const required = 'Обязательное поле'
 
-const regex = {
-  withoutSpaces: /^\S*$/,
-  onlyLatin: /^[a-zA-Z]+$/,
-}
+// const regex = {
+//   withoutSpaces: /^\S*$/,
+//   onlyLatin: /^[a-zA-Z]+$/,
+// }
 
 export const requiredRule = {
   required,

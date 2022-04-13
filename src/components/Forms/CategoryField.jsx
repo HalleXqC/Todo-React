@@ -26,7 +26,7 @@ export const CategoryField = React.forwardRef(({
         </button>
         {error && 
           <span className={cls.error}>
-            {error.message}
+            {error}
           </span>
         }
       </div>
