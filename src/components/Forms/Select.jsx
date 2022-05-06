@@ -2,10 +2,8 @@ import React from 'react'
 import cls from './Forms.module.scss'
 
 export const Select = React.forwardRef(({
-  className = '',
   label,
   error,
-  disabled,
   children,
   ...rest
 }, ref) => {
@@ -17,7 +15,6 @@ export const Select = React.forwardRef(({
         <select
           className={cls.formInput}
           ref={ref}
-          disabled={disabled}
           {...rest}
         >
           {children}
@@ -25,7 +22,7 @@ export const Select = React.forwardRef(({
 
         {error && 
           <span className={cls.error}>
-            {error.message}
+            {error}
           </span>
         }
       </div>

@@ -33,7 +33,7 @@ export const Login = () => {
           label="Email"
           key={'123'}
           placeholder="example@gmail.com"
-          error={formState.errors?.email}
+          error={formState.errors?.email?.message}
           { ...register('email', requiredRule) }
         />
 
@@ -41,8 +41,7 @@ export const Login = () => {
           label="Password"
           key={'321'}
           placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
-          error={formState.errors?.password}
-          id={cls.formPassword}
+          error={formState.errors?.password?.message}
           { ...register('password', requiredRule) }
         />
 

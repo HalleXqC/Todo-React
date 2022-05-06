@@ -3,8 +3,6 @@ import cls from './Forms.module.scss'
 import { AiOutlineArrowRight as ArrowRight } from 'react-icons/ai'
 
 export const CategoryField = React.forwardRef(({
-  type = 'text',
-  className = '',
   label,
   error,
   onClick,
@@ -15,13 +13,17 @@ export const CategoryField = React.forwardRef(({
     <label className={`${cls.formLabel} ${cls.formCategory}`}>
       <div>
         <input
-          type={type}
+          type="text"
           className={cls.formInput}
           ref={ref}
-          disabled={disabled}
           {...rest}
         />
-        <button className={cls.submit} onClick={onClick} disabled={disabled}>
+        
+        <button 
+          className={cls.submit} 
+          onClick={onClick} 
+          disabled={disabled}
+        >
           <ArrowRight className={cls.icon}/>
         </button>
         {error && 

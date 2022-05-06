@@ -2,11 +2,8 @@ import React from 'react'
 import cls from './Forms.module.scss'
 
 export const Date = React.forwardRef(({
-  type = 'date',
-  className = '',
   label,
   error,
-  disabled,
   ...rest
 }, ref) => {
   return (
@@ -14,15 +11,14 @@ export const Date = React.forwardRef(({
       <p>{label}:</p>
       <div>
         <input
-          type={type}
+          type="date"
           className={cls.formInput}
           ref={ref}
-          disabled={disabled}
           {...rest}
         />
         {error && 
           <span className={cls.error}>
-            {error.message}
+            {error}
           </span>
         }
       </div>

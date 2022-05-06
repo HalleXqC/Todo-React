@@ -2,11 +2,8 @@ import React from 'react'
 import cls from './Forms.module.scss'
 
 export const TextField = React.forwardRef(({
-  type = 'text',
-  className = '',
   label,
   error,
-  disabled,
   placeholder,
   ...rest
 }, ref) => {
@@ -15,16 +12,15 @@ export const TextField = React.forwardRef(({
       <p>{label}:</p>
       <div>
         <input
-          type={type}
+          type="text"
           className={cls.formInput}
           ref={ref}
-          disabled={disabled}
           placeholder={placeholder}
           {...rest}
         />
         {error && 
           <span className={cls.error}>
-            {error.message ? error.message : error}
+            {error}
           </span>
         }
       </div>

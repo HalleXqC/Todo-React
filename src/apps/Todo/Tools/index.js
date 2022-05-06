@@ -9,6 +9,6 @@ export const getCategoryName = (categories, categoryName) => {
 
 const token = localStorage.getItem('userToken')
 
-export const headers = {
+export const headers = token && {
   'Authorization': `Token ${token}`
 }

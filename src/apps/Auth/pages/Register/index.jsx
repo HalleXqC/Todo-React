@@ -9,7 +9,7 @@ import {
   groupRules,
   nameRules,
   passwordRules,
-} from "../../Tools/forms"
+} from '../../Tools/forms'
 import { calculateAge } from '../../Tools/calculateAge'
 import { useRegister } from '../../Hooks/useRegister'
 import { Forms } from '../../../../components/Forms'
@@ -22,11 +22,11 @@ export const Register = () => {
     formState,
     reset,
   } = useForm()
-  
+
   const { actions, loaded, regErrors } = useRegister()
 
   const onSubmit = React.useCallback(data => {
-    actions.post({...data, age: calculateAge(data.birthday)})
+    actions.post({ ...data, age: calculateAge(data.birthday) })
     reset({
       email: '',
       password: '',
@@ -40,14 +40,6 @@ export const Register = () => {
 
   }, [actions, reset])
 
-  const options = ['Android', 'Backend', 'Frontend'].map((item, i) => {
-    return (
-      <option value={i + 1 + ''} key={i} >
-        {item}
-      </option>
-    )
-  })
-
   return (
     <div className={cls.root}>
       <h1 className={cls.formTitle}>Sign up</h1>
@@ -58,64 +50,83 @@ export const Register = () => {
           type="email"
           key={'1'}
           placeholder="example@email.com"
-          error={formState.errors?.email ? formState.errors.email : regErrors?.email ? regErrors.email.toString() : ''}
-          { ...register('email', emailRules) }
+          error={
+            formState.errors?.email?.message
+              ? formState.errors.email.message
+              : regErrors?.email
+                ? regErrors.email.toString()
+                : ''
+          }
+          {...register('email', emailRules)}
         />
 
-        <Forms.Password 
+        <Forms.Password
           label="Password"
           key={'2'}
           placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
-          error={formState.errors?.password}
+          error={formState.errors?.password?.message}
           id={cls.formPassword}
-          { ...register('password', passwordRules) }
+          {...register('password', passwordRules)}
         />
 
         <Forms.TextField
           label="First name"
           key={'3'}
           placeholder="Ivan"
-          error={formState.errors?.firstName}
-          { ...register('firstName', nameRules) }
+          error={formState.errors?.firstName?.message}
+          {...register('firstName', nameRules)}
         />
 
         <Forms.TextField
           label="Last name"
           key={'4'}
           placeholder="Ivanov"
-          error={formState.errors?.lastName}
-          { ...register('lastName', nameRules) }
+          error={formState.errors?.lastName?.message}
+          {...register('lastName', nameRules)}
         />
 
         <Forms.TextField
           label="Username"
           key={'5'}
           placeholder="example123"
-          error={formState.errors?.alias ? formState.errors.alias : regErrors?.username ? regErrors.username.toString() : ''}
-          { ...register('alias', usernameRules) }
+          error={
+            formState.errors?.alias?.message
+              ? formState.errors.alias.message
+              : regErrors?.username
+                ? regErrors.username.toString()
+                : ''
+          }
+          {...register('alias', usernameRules)}
         />
-        
+
         <Forms.TextField
           label="Group"
           key={'6'}
           placeholder="A-100; F-200"
-          error={formState.errors?.group}
-          { ...register('group', groupRules) }
+          error={formState.errors?.group?.message}
+          {...register('group', groupRules)}
         />
 
         <Forms.Select
           label="Direction"
           key={'7'}
-          error={formState.errors?.direction}
-          children={options}
-          { ...register('direction', directionRules) }
-        />
+          error={formState.errors?.direction?.message}
+          {...register('direction', directionRules)}
+        >
+          {
+            ['Android', 'Backend', 'Frontend'].map((item, i) => (
+              <option value={i + 1 + ''} key={i} >
+                {item}
+              </option>
+            ))
+          }
+        </Forms.Select>
 
         <Forms.Date
           label="Date of Birth"
           key={'8'}
-          error={formState.errors?.birthday}
-          { ...register('birthday', birthdayRules)}
+          error={formState.errors?.birthday?.message}
+          {...register('birthday', birthdayRules)}
         />
 
         <Forms.SubmitButton
@@ -125,13 +136,14 @@ export const Register = () => {
         <div className={cls.bottomText}>
           <p>
             Already have account? &nbsp;
-            <Link 
+            <Link
               to="/auth/login"
               className={cls.link}
-            >Sign in</Link>
+            >
+              Sign in
+            </Link>
           </p>
         </div>
-
       </form>
     </div>
   )

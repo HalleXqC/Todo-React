@@ -1,10 +1,10 @@
 import React from 'react'
 import cls from './Category.module.scss'
-import { AiOutlineDelete as Delete, AiOutlineEdit as Edit} from 'react-icons/ai'
+import { AiOutlineDelete as Delete, AiOutlineEdit as Edit } from 'react-icons/ai'
 import { Forms } from '../Forms'
-import { useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form'
 
-const Category = ({category, onDelete, onEdit, id, loaded, categoryError}) => {
+const Category = ({ category, onDelete, onEdit, id, loaded, categoryError }) => {
 
   const [isEdit, setIsEdit] = React.useState(false)
 
@@ -30,8 +30,8 @@ const Category = ({category, onDelete, onEdit, id, loaded, categoryError}) => {
       </div>
 
       <div className={cls.footer}>
-        <button 
-          className={cls.button} 
+        <button
+          className={cls.button}
           id={cls.delete}
           onClick={() => onDelete(id)}
           disabled={loaded}
@@ -50,16 +50,22 @@ const Category = ({category, onDelete, onEdit, id, loaded, categoryError}) => {
       </div>
 
       {
-        isEdit && 
-        <Forms.CategoryField
-          placeholder="New category title"
-          disabled={loaded}
-          onClick={handleSubmit(onSubmit)}
-          error={formState.errors?.name ? formState.errors.name.message : categoryError ? 'Такая категория уже существует!' : ''}
-          {...register('name', {required: 'Обязательное поле'})}
-        />
+        isEdit &&
+          <Forms.CategoryField
+            placeholder="New category title"
+            disabled={loaded}
+            onClick={handleSubmit(onSubmit)}
+            error={
+              formState.errors?.name
+                ? formState.errors.name.message
+                : categoryError
+                  ? 'Такая категория уже существует!'
+                  : ''
+            }
+            {...register('name', { required: 'Обязательное поле' })}
+          />
       }
-      
+
     </div>
   )
 }

@@ -18,14 +18,14 @@ export const Create = () => {
     setValue,
     reset,
   } = useForm()
-  
+
   const { actions, loaded, createError } = useCreate()
 
   const { categories } = useCategories()
 
   const onSubmit = React.useCallback(data => {
     if (newCategory) {
-      actions.postWithCategory({name: data.category}, data)
+      actions.postWithCategory({ name: data.category }, data)
     } else {
       actions.post(data)
     }
@@ -45,15 +45,15 @@ export const Create = () => {
     <section className={cls.root}>
       <h1 className={cls.title}>Create new todo</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={cls.form}>
-        <Forms.TextField 
+        <Forms.TextField
           label="Title"
           placeholder="Cleaning"
-          error={formState.errors.title}
-          { ...register('title', titleRules)}
+          error={formState.errors?.title?.message}
+          {...register('title', titleRules)}
         />
         <Forms.Select
           label="Category"
-          error={formState.errors.category}
+          error={formState.errors?.category?.message}
           onChange={e => {
             const value = e.currentTarget.value
             setValue('category', value)
@@ -92,17 +92,16 @@ export const Create = () => {
         <Forms.TextArea
           label="Description"
           placeholder="Clean up the room"
-          error={formState.errors.text}
-          id={cls.formArea}
-          { ...register('text', textRules)}
+          error={formState.errors?.text?.message}
+          {...register('text', textRules)}
         />
 
-        <Forms.SubmitButton 
+        <Forms.SubmitButton
           disabled={loaded}
         />
 
         <div className={cls.bottomText}>
-          <Link 
+          <Link
             to="/"
             className={cls.link}
           >Go back</Link>

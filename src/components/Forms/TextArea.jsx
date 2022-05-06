@@ -2,12 +2,9 @@ import React from 'react'
 import cls from './Forms.module.scss'
 
 export const TextArea = React.forwardRef(({
-  className = '',
   label,
   error,
-  disabled,
   placeholder,
-  id,
   ...rest
 }, ref) => {
   return (
@@ -18,13 +15,12 @@ export const TextArea = React.forwardRef(({
           className={cls.formInput}
           ref={ref}
           id={cls.formArea}
-          disabled={disabled}
           placeholder={placeholder}
           {...rest}
         ></textarea>
         {error && 
           <span className={cls.error}>
-            {error.message}
+            {error}
           </span>
         }
       </div>

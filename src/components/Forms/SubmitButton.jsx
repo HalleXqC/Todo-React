@@ -1,7 +1,7 @@
 import React from 'react'
 import cls from './Forms.module.scss'
 
-export const SubmitButton = ({disabled, className}) => {
+export const SubmitButton = ({ disabled }) => {
   return (
     <button 
       type="submit"

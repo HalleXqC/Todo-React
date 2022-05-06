@@ -60,12 +60,12 @@ export const Page = () => {
         <Forms.TextField 
           label="Title"
           placeholder="Cleaning"
-          error={formState.errors.title}
+          error={formState.errors?.title?.message}
           { ...register('title', titleRules)}
         />
         <Forms.Select
           label="Category"
-          error={formState.errors.category}
+          error={formState.errors?.category?.message}
           defaultValue={singleTodo.category}
           onChange={e => {
             const value = e.currentTarget.value
@@ -106,7 +106,7 @@ export const Page = () => {
         <Forms.TextArea
           label="Description"
           placeholder="Clean up the room"
-          error={formState.errors.text}
+          error={formState.errors?.text?.message}
           id={cls.formArea}
           { ...register('text', textRules)}
         />
