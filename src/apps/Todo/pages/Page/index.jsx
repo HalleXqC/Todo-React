@@ -4,13 +4,11 @@ import { usePage } from '../../Hooks/usePage'
 import Loader from '../../../../components/Loader/index'
 import { useForm } from 'react-hook-form'
 import { Forms } from '../../../../components/Forms'
-import { textRules, titleRules, } from '../../Tools/forms'
+import { textRules, titleRules } from '../../Tools/forms'
 import { useCategories } from '../../../Categories/Hooks/useCategories'
 import { Link } from 'react-router-dom'
 
 export const Page = () => {
-
-
   const [newCategory, setCategory] = React.useState(false)
 
   const {
@@ -20,14 +18,14 @@ export const Page = () => {
     setValue,
     reset,
   } = useForm()
-  
+
   const { categories } = useCategories()
 
   const { singleTodo, loaded, actions, categoryError } = usePage()
 
   const onSubmit = React.useCallback(data => {
     if (newCategory) {
-      actions.editWithNewCategory({name: data.category}, data)
+      actions.editWithNewCategory({ name: data.category }, data)
     } else {
       actions.edit(data)
     }
@@ -57,7 +55,7 @@ export const Page = () => {
     <section className={cls.root}>
       <h1 className={cls.title}>Edit todo</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={cls.form}>
-        <Forms.TextField 
+        <Forms.TextField
           label="Title"
           placeholder="Cleaning"
           error={formState.errors?.title?.message}
@@ -80,8 +78,8 @@ export const Page = () => {
           }}
         >
           {
-            [...categories, {id: 0, name: 'Новая категория'}].map(item => (
-              <option 
+            [...categories, { id: 0, name: 'Новая категория' }].map(item => (
+              <option
                 value={item.id}
                 key={item.id}
               >{item.name}</option>
@@ -111,12 +109,12 @@ export const Page = () => {
           { ...register('text', textRules)}
         />
 
-        <Forms.SubmitButton 
+        <Forms.SubmitButton
           disabled={loaded}
         />
 
         <div className={cls.bottomText}>
-          <Link 
+          <Link
             to="/"
             className={cls.link}
           >Go back</Link>

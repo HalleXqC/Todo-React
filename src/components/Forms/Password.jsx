@@ -1,5 +1,5 @@
 import React from 'react'
-import { AiOutlineEyeInvisible as EyeClosed, AiOutlineEye as EyeOpened} from 'react-icons/ai'
+import { AiOutlineEyeInvisible as EyeClosed, AiOutlineEye as EyeOpened } from 'react-icons/ai'
 import cls from './Forms.module.scss'
 
 export const Password = React.forwardRef(({
@@ -8,7 +8,6 @@ export const Password = React.forwardRef(({
   placeholder,
   ...rest
 }, ref) => {
-
   const [isClosed, setIsClosed] = React.useState(true)
 
   return (
@@ -23,17 +22,17 @@ export const Password = React.forwardRef(({
           id={cls.formPassword}
           {...rest}
         />
-        <EyeClosed 
+        <EyeClosed
           className={cls.formEye}
-          style={isClosed ? {display: 'block'} : {display: 'none'}} 
-          onClick={() => setIsClosed(false)} 
+          style={isClosed ? { display: 'block' } : { display: 'none' }}
+          onClick={() => setIsClosed(false)}
         />
-        <EyeOpened 
-          className={cls.formEye} 
-          style={isClosed ? {display: 'none'} : {display: 'block'}} 
-          onClick={() => setIsClosed(true)} 
+        <EyeOpened
+          className={cls.formEye}
+          style={isClosed ? { display: 'none' } : { display: 'block' }}
+          onClick={() => setIsClosed(true)}
         />
-        {error && 
+        {error &&
           <span className={cls.error}>
             {error}
           </span>

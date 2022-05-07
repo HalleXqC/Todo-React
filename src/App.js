@@ -1,3 +1,4 @@
+import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import * as AuthPages from './apps/Auth/pages'
 import * as TodoPages from './apps/Todo/pages'
@@ -15,8 +16,8 @@ const App = () => {
         <Route path="/category/settings" element={<CategoryPages.Settings />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
-      <Route path='/auth/login' element={<AuthPages.Login />} />
-      <Route path='/auth/register' element={<AuthPages.Register />} />
+      <Route path="/auth/login" element={<AuthPages.Login />} />
+      <Route path="/auth/register" element={<AuthPages.Register />} />
     </Routes>
   )
 }

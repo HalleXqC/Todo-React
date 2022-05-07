@@ -1,6 +1,5 @@
-import instance from "../../../configs"
-import { headers } from "../Tools"
-
+import instance from '../../../configs'
+import { headers } from '../Tools'
 
 export const createTodo = data => {
   return instance.post('/todo/create/', data, {
@@ -27,11 +26,10 @@ export const completeTodo = (id, data) => {
 }
 
 export const addCategory = data => {
-  return instance.post(`/category/create/`, data, {
+  return instance.post('/category/create/', data, {
     headers,
   })
 }
-
 
 export const getSingleTodo = id => {
   return instance.get(`/todo/detail/${id}/`, {

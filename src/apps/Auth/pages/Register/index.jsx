@@ -37,7 +37,6 @@ export const Register = () => {
       direction: '1',
       birthday: '',
     })
-
   }, [actions, reset])
 
   return (

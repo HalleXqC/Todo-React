@@ -1,12 +1,11 @@
 import React from 'react'
 import cls from './Todos.module.scss'
-import { AiOutlineDelete as Delete, AiOutlineEdit as Edit} from 'react-icons/ai'
-import { BsCheckLg as Complete} from 'react-icons/bs'
+import { AiOutlineDelete as Delete, AiOutlineEdit as Edit } from 'react-icons/ai'
+import { BsCheckLg as Complete } from 'react-icons/bs'
 import { FaTimes as Uncomplete } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 const Todo = ({ title, text, category, id, is_done, onDelete, onComplete, loaded }) => {
-
   const complete = () => {
     onComplete(
       id,
@@ -36,8 +35,8 @@ const Todo = ({ title, text, category, id, is_done, onDelete, onComplete, loaded
           </div>
 
           <div className={cls.footer}>
-            <button 
-              className={cls.button} 
+            <button
+              className={cls.button}
               id={cls.delete}
               onClick={() => onDelete(id)}
               disabled={loaded}
@@ -45,7 +44,7 @@ const Todo = ({ title, text, category, id, is_done, onDelete, onComplete, loaded
               <Delete className={cls.icon} />
             </button>
 
-            <button 
+            <button
               className={cls.button}
               id={cls.complete}
               onClick={complete}
@@ -66,12 +65,12 @@ const Todo = ({ title, text, category, id, is_done, onDelete, onComplete, loaded
         </div>
         <div className={cls.cardBack}>
           <p>
-            {text} 
+            {text}
             &nbsp;
             <span>(completed)</span>
           </p>
 
-          <button 
+          <button
             className={cls.button}
             onClick={complete}
             disabled={loaded}

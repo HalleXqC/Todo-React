@@ -5,7 +5,6 @@ import { Forms } from '../Forms'
 import { useForm } from 'react-hook-form'
 
 const Category = ({ category, onDelete, onEdit, id, loaded, categoryError }) => {
-
   const [isEdit, setIsEdit] = React.useState(false)
 
   const {
@@ -18,7 +17,7 @@ const Category = ({ category, onDelete, onEdit, id, loaded, categoryError }) => 
   const onSubmit = React.useCallback(data => {
     onEdit(id, data)
     reset({
-      name: ''
+      name: '',
     })
   }, [id, onEdit, reset])
 

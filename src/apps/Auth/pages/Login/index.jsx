@@ -14,7 +14,7 @@ export const Login = () => {
     reset,
   } = useForm()
 
-  const { actions, loaded, authError, } = useLogin()
+  const { actions, loaded, authError } = useLogin()
 
   const onSubmit = React.useCallback(data => {
     actions.post(data)
@@ -47,20 +47,20 @@ export const Login = () => {
 
         <p className={cls.error}>{authError && authError}</p>
 
-        <Forms.SubmitButton 
+        <Forms.SubmitButton
           disabled={loaded}
         />
 
         <div className={cls.bottomText}>
           <p>
-            Don't have account yet? &nbsp;
-            <Link 
+            Dont have account yet? &nbsp;
+            <Link
               to="/auth/register"
               className={cls.link}
             >Sign up</Link>
           </p>
         </div>
-        
+
       </form>
     </div>
   )

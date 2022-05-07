@@ -7,7 +7,6 @@ export const Select = React.forwardRef(({
   children,
   ...rest
 }, ref) => {
-
   return (
     <label className={cls.formLabel}>
       <p>{label}:</p>
@@ -20,7 +19,7 @@ export const Select = React.forwardRef(({
           {children}
         </select>
 
-        {error && 
+        {error &&
           <span className={cls.error}>
             {error}
           </span>

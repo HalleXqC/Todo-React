@@ -1,5 +1,5 @@
-import React from "react"
-import { signUp } from "../API"
+import React from 'react'
+import { signUp } from '../API'
 import { useNavigate } from 'react-router-dom'
 
 export const useRegister = () => {

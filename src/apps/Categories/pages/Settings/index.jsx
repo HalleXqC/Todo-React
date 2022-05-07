@@ -6,8 +6,7 @@ import Loader from '../../../../components/Loader'
 import Category from '../../../../components/Category'
 
 export const Settings = () => {
-
-  const { categories, loaded, actions, categoryError} = useCategories()
+  const { categories, loaded, actions, categoryError } = useCategories()
 
   const newCategories = categories?.slice(1)
 
@@ -16,7 +15,7 @@ export const Settings = () => {
     <div className={cls.root}>
       <Sidebar />
       <div className={cls.categories}>
-      <h1 className={cls.title}>All Categories</h1>
+        <h1 className={cls.title}>All Categories</h1>
         {
           !newCategories.length && <h1 className={cls.error}>No categories yet</h1>
         }

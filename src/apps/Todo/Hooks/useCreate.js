@@ -1,7 +1,6 @@
 import React from 'react'
-import { createTodo } from '../API'
+import { createTodo, addCategory } from '../API'
 import { useNavigate } from 'react-router-dom'
-import { addCategory } from '../API'
 
 export const useCreate = () => {
   const [loaded, setLoaded] = React.useState(false)
@@ -26,7 +25,7 @@ export const useCreate = () => {
   const postWithCategory = React.useCallback((categoryData, todoData) => {
     addCategory(categoryData)
       .then(res => {
-        post({...todoData, category: res.data.id})
+        post({ ...todoData, category: res.data.id })
       })
       .catch(err => {
         setError(err.response.data)

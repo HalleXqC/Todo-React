@@ -16,7 +16,7 @@ export const Date = React.forwardRef(({
           ref={ref}
           {...rest}
         />
-        {error && 
+        {error &&
           <span className={cls.error}>
             {error}
           </span>

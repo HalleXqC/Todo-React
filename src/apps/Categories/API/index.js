@@ -1,8 +1,8 @@
-import instance from "../../../configs"
-import { headers } from "../Tools"
+import instance from '../../../configs'
+import { headers } from '../Tools'
 
 export const getCategories = () => {
-  return instance.get(`/category/`, {
+  return instance.get('/category/', {
     headers,
   })
 }

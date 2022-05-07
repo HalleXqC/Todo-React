@@ -18,7 +18,7 @@ export const TextField = React.forwardRef(({
           placeholder={placeholder}
           {...rest}
         />
-        {error && 
+        {error &&
           <span className={cls.error}>
             {error}
           </span>

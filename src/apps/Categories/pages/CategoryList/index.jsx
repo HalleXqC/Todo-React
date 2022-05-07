@@ -8,16 +8,14 @@ import { useCategories } from '../../Hooks/useCategories'
 import { BsArrowReturnLeft as ArrowLeft } from 'react-icons/bs'
 
 export const CategoryList = () => {
-  
   const { id } = useParams()
 
   const { base, actions, loaded } = useList(`?category=${id}`)
 
   const { category } = useCategories()
 
-
   if (!base) return <Loader/>
-  if (!category) return <Loader/>  
+  if (!category) return <Loader/>
   return (
     <section className={cls.root}>
       <h1 className={cls.category}>

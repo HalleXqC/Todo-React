@@ -1,10 +1,8 @@
 import React from 'react'
-import { editCategory, getCategories, getCategory } from '../API'
+import { editCategory, getCategories, getCategory, deleteCategory } from '../API'
 import { useParams } from 'react-router-dom'
-import { deleteCategory } from '../API/index'
 
 export const useCategories = () => {
-
   const [categories, setCategories] = React.useState(null)
   const [category, setCategory] = React.useState(null)
   const [loaded, setLoaded] = React.useState(false)
@@ -30,29 +28,27 @@ export const useCategories = () => {
     setLoaded(true)
 
     deleteCategory(id)
-    .then(get)
-    .finally(() => {
-      setLoaded(false)
-    })
+      .then(get)
+      .finally(() => {
+        setLoaded(false)
+      })
   }
 
   const edit = (id, data) => {
     setLoaded(true)
 
     editCategory(id, data)
-    .then(() => {
-      get()
-      setError('')
-    })
-    .catch(error => {
-      setError(error.response)
-    })
-    .finally(() => {
-      setLoaded(false)
-    })
+      .then(() => {
+        get()
+        setError('')
+      })
+      .catch(error => {
+        setError(error.response)
+      })
+      .finally(() => {
+        setLoaded(false)
+      })
   }
-
-  
 
   React.useEffect(() => {
     get()
@@ -67,6 +63,6 @@ export const useCategories = () => {
     actions: {
       remove,
       edit,
-    }
+    },
   }
 }
