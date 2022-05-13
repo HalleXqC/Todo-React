@@ -1,17 +1,20 @@
 import React from 'react'
 import { completeTodo, deleteTodo, getTodos } from '../API'
+import { useSelector } from 'react-redux'
 
 export const useList = category => {
   const [base, setBase] = React.useState('')
 
   const [loaded, setLoaded] = React.useState(false)
 
+  const userToken = useSelector(s => s.authReducer.userToken)
+
   const get = React.useCallback(() => {
-    getTodos(category)
+    getTodos(category, userToken)
       .then(res => {
         setBase(res.data)
       })
-  }, [category])
+  }, [category, userToken])
 
   const remove = React.useCallback(id => {
     setLoaded(true)
@@ -35,7 +38,7 @@ export const useList = category => {
 
   React.useEffect(() => {
     get()
-  }, [get])
+  }, [get, userToken])
 
   return {
     base,

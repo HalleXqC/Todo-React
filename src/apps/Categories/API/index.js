@@ -1,9 +1,11 @@
 import instance from '../../../configs'
 import { headers } from '../Tools'
 
-export const getCategories = () => {
+export const getCategories = token => {
   return instance.get('/category/', {
-    headers,
+    headers: {
+      Authorization: `Token ${token}`,
+    },
   })
 }
 

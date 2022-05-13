@@ -7,9 +7,11 @@ export const createTodo = data => {
   })
 }
 
-export const getTodos = query => {
+export const getTodos = (query, token) => {
   return instance.get(`/todo/all/${query}`, {
-    headers,
+    headers: {
+      Authorization: `Token ${token}`,
+    },
   })
 }
 

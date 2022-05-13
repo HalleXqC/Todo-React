@@ -1,6 +1,7 @@
 import React from 'react'
 import { editCategory, getCategories, getCategory, deleteCategory } from '../API'
 import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export const useCategories = () => {
   const [categories, setCategories] = React.useState(null)
@@ -9,13 +10,14 @@ export const useCategories = () => {
   const [categoryError, setError] = React.useState('')
 
   const { id } = useParams()
+  const userToken = useSelector(s => s.authReducer.userToken)
 
   const get = React.useCallback(() => {
-    getCategories()
+    getCategories(userToken)
       .then(res => {
         setCategories(res.data)
       })
-  }, [])
+  }, [userToken])
 
   const getSingleCategory = React.useCallback((id) => {
     getCategory(id)
@@ -53,7 +55,7 @@ export const useCategories = () => {
   React.useEffect(() => {
     get()
     if (id) getSingleCategory(id)
-  }, [get, getSingleCategory, id])
+  }, [get, getSingleCategory, id, userToken])
 
   return {
     categories,
