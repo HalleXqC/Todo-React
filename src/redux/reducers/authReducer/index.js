@@ -1,5 +1,7 @@
+const token = localStorage.getItem('userToken')
+
 const initialState = {
-  userToken: !!localStorage.getItem('userToken'),
+  userToken: token || false,
 }
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -9,6 +11,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
       ...state,
       userToken: payload,
     }
-  default: return state
+  default:
+    return state
   }
 }
